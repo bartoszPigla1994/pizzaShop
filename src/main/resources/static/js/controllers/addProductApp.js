@@ -10,7 +10,7 @@ var formApp = angular.module('addProductApp', [])
 
             $http({
                 method: 'POST',
-                url: 'http://localhost:8080/pizza/create',
+                url: 'http://pizzahop22.herokuapp.com/pizza/create',
                 headers: {'Content-Type': 'application/json'},
                 data:$.param(JSON.stringify($scope.selectedItem))
             }).then(function successCallback(response) {

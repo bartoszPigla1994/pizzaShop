@@ -6,7 +6,7 @@ var formApp = angular.module('productComplaintsApp', [])
         var getComplaints=function () {
             $http({
                 method: 'GET',
-                url: 'http://localhost:8080/complaint/read?pageSize='+$scope.pageSize+'&pageNumber='+$scope.pageNumber,
+                url: 'http://pizzahop22.herokuapp.com/read?pageSize='+$scope.pageSize+'&pageNumber='+$scope.pageNumber,
                 headers: {'Content-Type': 'application/json'}
             }).then(function successCallback(response) {
                 console.log('complaints');
@@ -20,7 +20,7 @@ var formApp = angular.module('productComplaintsApp', [])
         var getComplaintCount=function () {
             $http({
                 method: 'GET',
-                url: 'http://localhost:8080/complaint/count',
+                url: 'http://pizzahop22.herokuapp.com/complaint/count',
                 headers: {'Content-Type': 'application/json'}
             }).then(function successCallback(response) {
                 console.log('complaint count');
