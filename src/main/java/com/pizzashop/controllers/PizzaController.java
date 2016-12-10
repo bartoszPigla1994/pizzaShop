@@ -46,7 +46,7 @@ public class PizzaController {
             pizzaList= pizzaRepository
                     .findAll(new PageRequest((pageNumber == null) ? 0 : pageNumber - 1, pageSize))
                     .getContent();
-
+            System.out.println(pizzaList);
             return new ResponseEntity<>(pizzaList, HttpStatus.OK);
         }
         catch (Exception exception){
@@ -60,6 +60,7 @@ public class PizzaController {
         Pizza pizza=null;
         try{
             pizza= pizzaRepository.findOne(pizzaId);
+            System.out.println(pizza);
             return new ResponseEntity<>(pizza, HttpStatus.OK);
         }
         catch (Exception exception){
