@@ -93,4 +93,15 @@ public class Complaint {
         result = 31 * result + (complaintStatus != null ? complaintStatus.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Complaint{" +
+                "complaintId=" + complaintId +
+                ", submitDate=" + submitDate +
+                ", comment='" + comment + '\'' +
+                ", productOrder=" + productOrder +
+                ", complaintStatus=" + complaintStatus +
+                '}';
+    }
 }

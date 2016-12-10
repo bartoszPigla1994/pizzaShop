@@ -132,6 +132,8 @@ public class DbInitializer {
         complaint.setComplaintStatus(ComplaintStatus.odrzucone);
 
         complaint = complaintRepository.save(complaint);
+
+        System.out.println(complaint);
         //op1.setProductOrder();
     }
 }

@@ -6,7 +6,7 @@ var formApp = angular.module('productComplaintsApp', [])
         var getComplaints=function () {
             $http({
                 method: 'GET',
-                url: 'http://pizzahop22.herokuapp.com/read?pageSize='+$scope.pageSize+'&pageNumber='+$scope.pageNumber,
+                url: 'http://pizzahop22.herokuapp.com/complaint/read?pageSize='+$scope.pageSize+'&pageNumber='+$scope.pageNumber,
                 headers: {'Content-Type': 'application/json'}
             }).then(function successCallback(response) {
                 console.log('complaints');
