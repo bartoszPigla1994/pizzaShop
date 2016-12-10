@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script
+            src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
+    <title>Wybierz produkt do usuniecia</title>
+</head>
+<body ng-app="editProductApp" ng-controller="editProductController">
+
+<nav class="navbar navbar-default" role="navigation" ng-include="'templates/headPanel.html'"></nav>
+<!--<p>{{selectedIdx}}</p>-->
+<!--<p>{{pageCount}}</p>-->
+<!--<p>{{collection}}</p>-->
+<div class="container-fluid">
+
+
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- dialog body -->
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    Czy na pewno chcesz usunąć produkt?
+                </div>
+                <!-- dialog buttons -->
+                <div class="modal-footer">
+                    <button type="button" class="btn" data-dismiss="modal">Nie</button>
+                    <button type="button" class="btn btn-primary">Tak</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--row-->
+    <div class="row">
+
+        <!--left-->
+        <div class="col-md-2" id="leftCol">
+            <div ng-if="selectedIdx == -1" ng-include="'templates/filterPanel.html'"></div>
+        </div>
+        <!--/left-->
+        <!--right-->
+        <div class="col-md-9" ng-if="selectedIdx == -1">
+            <div class="alert alert-success fade in" ng-if="edited == true">
+                <a href="#" class="close" data-dismiss="alert">&times;</a> <strong>Operacja zakonczona
+                powodzeniem!</strong>
+                Pomyslnie zmodyfikowano produkt do menu
+            </div>
+            <div class="row">
+                <h2>Wybierz produkt do edycji</h2>
+
+                <div class="col-sm-6 col-md-3" ng-repeat="item in collection">
+                    <div ng-include="'templates/pizzaItem.html'" ng-if="item.type == 'pizza'"></div>
+                    <div ng-include="'templates/sauceItem.html'" ng-if="item.type == 'sos'"></div>
+                    <div ng-include="'templates/drinkItem.html'" ng-if="item.type == 'napoj'"></div>
+                </div>
+
+                <div class="container-fluid" ng-include="'templates/paginationPanel.html'"></div>
+            </div>
+            <!--/right-->
+        </div>
+
+        <div class="col-md-9" ng-if="selectedIdx != -1">
+            <button type="button" class="btn btn-default" ng-click="openItem(-1)">Powrot</button>
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <form name="pizzaInfo" class="item active" ng-if="selectedItem.type == 'pizza'">
+                        <div ng-include="'templates/productMenuManagement/pizzaInfo.html'"></div>
+
+                        <button href="#carousel-example-generic" class="btn btn-default" data-slide="next">Dalej
+                        </button>
+                    </form>
+                    <form name="sauceInfo" ng-if="selectedItem.type == 'sos'" class="item active">
+                        <div ng-include="'templates/productMenuManagement/sauceInfo.html'"></div>
+
+                        <button href="#carousel-example-generic" class="btn btn-default" data-slide="prev">Wstecz
+                        </button>
+                        <button href="#carousel-example-generic" class="btn btn-default" data-slide="next">Dalej
+                        </button>
+                    </form>
+                    <form name="drinkInfo" ng-if="selectedItem.type == 'napoj'" class="item active">
+                        <div  ng-include="'templates/productMenuManagement/drinkInfo.html'"></div>
+
+                        <button href="#carousel-example-generic" class="btn btn-default" data-slide="prev">Wstecz
+                        </button>
+                        <button href="#carousel-example-generic" class="btn btn-default" data-slide="next">Dalej
+                        </button>
+                    </form>
+
+                    <form name="pizzaCost" class="item" ng-if="selectedItem.type == 'pizza'">
+                        <div ng-include="'templates/productMenuManagement/pizzaCost.html'"></div>
+
+                        <button href="#carousel-example-generic" class="btn btn-default" data-slide="prev">Wstecz
+                        </button>
+                        <button href="#carousel-example-generic" class="btn btn-default" data-slide="next">Dalej
+                        </button>
+                    </form>
+                    <form name="sauceCost" ng-if="selectedItem.type == 'sos'" class="item">
+                        <div ng-include="'templates/productMenuManagement/sauceCost.html'"></div>
+
+                        <button href="#carousel-example-generic" class="btn btn-default" data-slide="prev">Wstecz
+                        </button>
+                        <button href="#carousel-example-generic" class="btn btn-default" data-slide="next">Dalej
+                        </button>
+                    </form>
+                    <form name="drinkCost" ng-if="selectedItem.type == 'napoj'" class="item">
+                        <div  ng-include="'templates/productMenuManagement/drinkCost.html'"></div>
+
+                        <button href="#carousel-example-generic" class="btn btn-default" data-slide="prev">Wstecz
+                        </button>
+                        <button href="#carousel-example-generic" class="btn btn-default" data-slide="next">Dalej
+                        </button>
+                    </form>
+
+                    <form class="item">
+                        <div  ng-include="'templates/productMenuManagement/rabat.html'"></div>
+
+                        <button href="#carousel-example-generic" class="btn btn-default" data-slide="prev">Wstecz
+                        </button>
+                        <button href="#carousel-example-generic" class="btn btn-default" data-slide="next">Dalej
+                        </button>
+                    </form>
+
+                    <form class="item">
+                        <div ng-include="'templates/productMenuManagement/photo.html'"></div>
+
+                        <button href="#carousel-example-generic" class="btn btn-default" data-slide="prev">Wstecz
+                        </button>
+                        <button type="button" class="btn btn-primary" ng-click="editProduct()">Edytuj produkt</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--/row-->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+
+<script src="http://code.angularjs.org/1.2.13/angular.js"></script>
+
+<script src="js/controllers/editProductApp.js"></script>
+<script src="js/models/product.js"></script>
+<script src="js/helpers/itemSelection.js"></script>
+<script src="js/getProductImage.js"></script>
+<script src="js/filterToggle.js"></script>
+<script src="js/toggleCheckBox.js"></script>
+<script src="js/initializeCheckBoxModel.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script
+            src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script src="http://code.angularjs.org/1.2.13/angular.js"></script>
+    <script src="js/controllers/productComplaintApp.js"></script>
+    <script src="js/models/complaint.js"></script>
+    <script src="js/models/product.js"></script>
+    <script src="js/helpers/itemSelection.js"></script>
+
+    <script src="js/getProductImage.js"></script>
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
+    <title>Reklamacje</title>
+</head>
+<body ng-app="productComplaintsApp" ng-controller="productComplaintsController">
+<nav class="navbar navbar-default" role="navigation" ng-include="'templates/headPanel.html'"></nav>
+
+<div class="container-fluid">
+    <!--row-->
+    <div class="row">
+        <!--left-->
+        <div class="col-md-2" id="leftCol">
+            <div class="nav nav-stacked" id="sidebar">
+
+            </div>
+        </div>
+        <!--/left-->
+
+        <!--right-->
+        <div class="col-md-9" ng-if="selectedIdx == -1">
+
+            <h1>Reklamacje</h1>
+
+            <table class="table table-striped ">
+                <thead>
+                <th>e-mail</th>
+                <th>Imie klienta</th>
+                <th>Nazwisko klienta</th>
+                <th>Kwota zamowienia</th>
+                <th>Data zlozenia zamowienia</th>
+                <th>Data zlozenia reklamacji</th>
+                <th></th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="complaint in collection" >
+                    <td>{{complaint.productOrder.client.eMail}}</td>
+                    <td>{{complaint.productOrder.client.firstName}}</td>
+                    <td>{{complaint.productOrder.client.surname}}</td>
+                    <td>{{complaint.productOrder.price}}</td>
+                    <td>{{complaint.productOrder.orderDate}}</td>
+                    <td>{{complaint.submitDate}}</td>
+                    <td></td>
+                    <td>
+                        <button type="button" class="btn btn-default" ng-click="openItem($index)">Szczegoly</button>
+                    </td>
+                </tr>
+                </tbody>
+                </table>
+
+            <div class="container-fluid" ng-include="'templates/paginationPanel.html'"></div>
+
+        </div>
+
+        <div class="col-md-9" ng-if="selectedIdx != -1">
+            <button type="button" class="btn btn-default" ng-click="openItem(-1)">Powrot</button>
+
+            <h1>Reklamacja</h1>
+
+            <h3>Komentarz klienta</h3>
+
+            <p>{{selectedItem.comment}}</p>
+
+            <h3>Klient</h3>
+
+            <!--<td>{{selectedItem.productOrder.client.eMail}}</td>-->
+            <!--<td>{{selectedItem.productOrder.client.firstName}}</td>-->
+            <!--<td>{{selectedItem.productOrder.client.surname}}</td>-->
+            <!--<td>{{selectedItem.productOrder.price}}</td>-->
+            <!--<td>{{selectedItem.productOrder.orderDate}}</td>-->
+            <!--<td>{{selectedItem.submitDate}}</td>-->
+
+            <table class="table table-user-information">
+                <tbody>
+                <tr>
+                    <td>Imie:</td>
+                    <td>{{selectedItem.productOrder.client.firstName}}</td>
+                </tr>
+                <tr>
+                    <td>Nazwisko</td>
+                    <td>{{selectedItem.productOrder.client.surname}}</td>
+                </tr>
+
+                <tr>
+                    <td>E-mail</td>
+                    <td>{{selectedItem.productOrder.client.eMail}}</td>
+                </tr>
+
+                <tr>
+                    <td>Typ klienta</td>
+                    <td>{{selectedItem.productOrder.client.clientType}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h3>Zamowienie</h3>
+
+            <table class="table table-user-information">
+                <tbody>
+                <tr>
+                    <td>Cena zamowienia:</td>
+                    <td>{{selectedItem.productOrder.price}}</td>
+                </tr>
+                <tr>
+                    <td>Data zlozenia zamowienia</td>
+                    <td>{{selectedItem.productOrder.orderDate}}</td>
+                </tr>
+                <tr>
+                    <td>Data zlozenia reklamacji</td>
+                    <td>{{selectedItem.submitDate}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h3>Pozycje zamowienia</h3>
+
+            <table class="table table-striped ">
+                <thead>
+                <th>Nazwa</th>
+                <th>Cena</th>
+                <th>Liczba</th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="position in selectedItem.productOrder.orderPositionsList" >
+                    <td>{{position.product.name}}</td>
+                    <td>{{position.price}} zl</td>
+                    <td>{{position.count}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <button type="button" class="btn btn-default" ng-click="openItem(-1)">Powrot</button>
+        </div>
+        <!--</table>-->
+        <!--/right-->
+    </div>
+    <!--/row-->
+</div>
+
+</body>
+</html>
