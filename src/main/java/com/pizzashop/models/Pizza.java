@@ -60,5 +60,25 @@ public class Pizza extends Product{
         ingredients.add(ingredient);
     }
 
-
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        if (!super.equals(o)) return false;
+//
+//        Pizza pizza = (Pizza) o;
+//
+//        if (doughType != null ? !doughType.equals(pizza.doughType) : pizza.doughType != null) return false;
+//        if (doughPrice != null ? !doughPrice.equals(pizza.doughPrice) : pizza.doughPrice != null) return false;
+//        return ingredients != null ? ingredients.equals(pizza.ingredients) : pizza.ingredients == null;
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        int result = super.hashCode();
+//        result = 31 * result + (doughType != null ? doughType.hashCode() : 0);
+//        result = 31 * result + (doughPrice != null ? doughPrice.hashCode() : 0);
+//        result = 31 * result + (ingredients != null ? ingredients.hashCode() : 0);
+//        return result;
+//    }
 }

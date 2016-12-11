@@ -66,42 +66,42 @@ public class Complaint {
     public void setComplaintStatus(ComplaintStatus complaintStatus) {
         this.complaintStatus = complaintStatus;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Complaint complaint = (Complaint) o;
-
-        if (complaintId != null ? !complaintId.equals(complaint.complaintId) : complaint.complaintId != null)
-            return false;
-        if (submitDate != null ? !submitDate.equals(complaint.submitDate) : complaint.submitDate != null) return false;
-        if (comment != null ? !comment.equals(complaint.comment) : complaint.comment != null) return false;
-        if (productOrder != null ? !productOrder.equals(complaint.productOrder) : complaint.productOrder != null)
-            return false;
-        return complaintStatus == complaint.complaintStatus;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = complaintId != null ? complaintId.hashCode() : 0;
-        result = 31 * result + (submitDate != null ? submitDate.hashCode() : 0);
-        result = 31 * result + (comment != null ? comment.hashCode() : 0);
-        result = 31 * result + (productOrder != null ? productOrder.hashCode() : 0);
-        result = 31 * result + (complaintStatus != null ? complaintStatus.hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Complaint{" +
-                "complaintId=" + complaintId +
-                ", submitDate=" + submitDate +
-                ", comment='" + comment + '\'' +
-                ", productOrder=" + productOrder +
-                ", complaintStatus=" + complaintStatus +
-                '}';
-    }
+//
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        Complaint complaint = (Complaint) o;
+//
+//        if (complaintId != null ? !complaintId.equals(complaint.complaintId) : complaint.complaintId != null)
+//            return false;
+//        if (submitDate != null ? !submitDate.equals(complaint.submitDate) : complaint.submitDate != null) return false;
+//        if (comment != null ? !comment.equals(complaint.comment) : complaint.comment != null) return false;
+//        if (productOrder != null ? !productOrder.equals(complaint.productOrder) : complaint.productOrder != null)
+//            return false;
+//        return complaintStatus == complaint.complaintStatus;
+//
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        int result = complaintId != null ? complaintId.hashCode() : 0;
+//        result = 31 * result + (submitDate != null ? submitDate.hashCode() : 0);
+//        result = 31 * result + (comment != null ? comment.hashCode() : 0);
+//        result = 31 * result + (productOrder != null ? productOrder.hashCode() : 0);
+//        result = 31 * result + (complaintStatus != null ? complaintStatus.hashCode() : 0);
+//        return result;
+//    }
+//
+//    @Override
+//    public String toString() {
+//        return "Complaint{" +
+//                "complaintId=" + complaintId +
+//                ", submitDate=" + submitDate +
+//                ", comment='" + comment + '\'' +
+//                ", productOrder=" + productOrder +
+//                ", complaintStatus=" + complaintStatus +
+//                '}';
+//    }
 }

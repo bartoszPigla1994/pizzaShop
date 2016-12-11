@@ -77,32 +77,32 @@ public class OrderPosition {
     public void setRebate(Rebate rebate) {
         this.rebate = rebate;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        OrderPosition that = (OrderPosition) o;
-
-        if (orderPositionId != null ? !orderPositionId.equals(that.orderPositionId) : that.orderPositionId != null)
-            return false;
-        if (count != null ? !count.equals(that.count) : that.count != null) return false;
-        if (price != null ? !price.equals(that.price) : that.price != null) return false;
-        if (productOrder != null ? !productOrder.equals(that.productOrder) : that.productOrder != null) return false;
-        if (product != null ? !product.equals(that.product) : that.product != null) return false;
-        return rebate != null ? rebate.equals(that.rebate) : that.rebate == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = orderPositionId != null ? orderPositionId.hashCode() : 0;
-        result = 31 * result + (count != null ? count.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (productOrder != null ? productOrder.hashCode() : 0);
-        result = 31 * result + (product != null ? product.hashCode() : 0);
-        result = 31 * result + (rebate != null ? rebate.hashCode() : 0);
-        return result;
-    }
+//
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        OrderPosition that = (OrderPosition) o;
+//
+//        if (orderPositionId != null ? !orderPositionId.equals(that.orderPositionId) : that.orderPositionId != null)
+//            return false;
+//        if (count != null ? !count.equals(that.count) : that.count != null) return false;
+//        if (price != null ? !price.equals(that.price) : that.price != null) return false;
+//        if (productOrder != null ? !productOrder.equals(that.productOrder) : that.productOrder != null) return false;
+//        if (product != null ? !product.equals(that.product) : that.product != null) return false;
+//        return rebate != null ? rebate.equals(that.rebate) : that.rebate == null;
+//
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        int result = orderPositionId != null ? orderPositionId.hashCode() : 0;
+//        result = 31 * result + (count != null ? count.hashCode() : 0);
+//        result = 31 * result + (price != null ? price.hashCode() : 0);
+//        result = 31 * result + (productOrder != null ? productOrder.hashCode() : 0);
+//        result = 31 * result + (product != null ? product.hashCode() : 0);
+//        result = 31 * result + (rebate != null ? rebate.hashCode() : 0);
+//        return result;
+//    }
 }

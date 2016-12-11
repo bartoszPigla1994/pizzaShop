@@ -35,19 +35,19 @@ public class Sauce extends Product{
         seasonings.add(seasoning);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Sauce sauce = (Sauce) o;
-
-        return seasonings != null ? seasonings.equals(sauce.seasonings) : sauce.seasonings == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        return seasonings != null ? seasonings.hashCode() : 0;
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        Sauce sauce = (Sauce) o;
+//
+//        return seasonings != null ? seasonings.equals(sauce.seasonings) : sauce.seasonings == null;
+//
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return seasonings != null ? seasonings.hashCode() : 0;
+//    }
 }

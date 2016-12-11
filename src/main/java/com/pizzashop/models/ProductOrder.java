@@ -111,36 +111,36 @@ public class ProductOrder {
     public void setProductOrderStatus(ProductOrderStatus productOrderStatus) {
         this.productOrderStatus = productOrderStatus;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ProductOrder that = (ProductOrder) o;
-
-        if (productOrderId != null ? !productOrderId.equals(that.productOrderId) : that.productOrderId != null)
-            return false;
-        if (orderDate != null ? !orderDate.equals(that.orderDate) : that.orderDate != null) return false;
-        if (address != null ? !address.equals(that.address) : that.address != null) return false;
-        if (receiptDate != null ? !receiptDate.equals(that.receiptDate) : that.receiptDate != null) return false;
-        if (price != null ? !price.equals(that.price) : that.price != null) return false;
-        if (client != null ? !client.equals(that.client) : that.client != null) return false;
-        if (productOrderStatus != that.productOrderStatus) return false;
-        return orderPositions != null ? orderPositions.equals(that.orderPositions) : that.orderPositions == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = productOrderId != null ? productOrderId.hashCode() : 0;
-        result = 31 * result + (orderDate != null ? orderDate.hashCode() : 0);
-        result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (receiptDate != null ? receiptDate.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (client != null ? client.hashCode() : 0);
-        result = 31 * result + (productOrderStatus != null ? productOrderStatus.hashCode() : 0);
-        result = 31 * result + (orderPositions != null ? orderPositions.hashCode() : 0);
-        return result;
-    }
+//
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        ProductOrder that = (ProductOrder) o;
+//
+//        if (productOrderId != null ? !productOrderId.equals(that.productOrderId) : that.productOrderId != null)
+//            return false;
+//        if (orderDate != null ? !orderDate.equals(that.orderDate) : that.orderDate != null) return false;
+//        if (address != null ? !address.equals(that.address) : that.address != null) return false;
+//        if (receiptDate != null ? !receiptDate.equals(that.receiptDate) : that.receiptDate != null) return false;
+//        if (price != null ? !price.equals(that.price) : that.price != null) return false;
+//        if (client != null ? !client.equals(that.client) : that.client != null) return false;
+//        if (productOrderStatus != that.productOrderStatus) return false;
+//        return orderPositions != null ? orderPositions.equals(that.orderPositions) : that.orderPositions == null;
+//
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        int result = productOrderId != null ? productOrderId.hashCode() : 0;
+//        result = 31 * result + (orderDate != null ? orderDate.hashCode() : 0);
+//        result = 31 * result + (address != null ? address.hashCode() : 0);
+//        result = 31 * result + (receiptDate != null ? receiptDate.hashCode() : 0);
+//        result = 31 * result + (price != null ? price.hashCode() : 0);
+//        result = 31 * result + (client != null ? client.hashCode() : 0);
+//        result = 31 * result + (productOrderStatus != null ? productOrderStatus.hashCode() : 0);
+//        result = 31 * result + (orderPositions != null ? orderPositions.hashCode() : 0);
+//        return result;
+//    }
 }

@@ -49,25 +49,25 @@ public class Rebate {
     public void setProducts(Set<Product> products) {
         this.products = products;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Rebate rebate = (Rebate) o;
-
-        if (rebateId != null ? !rebateId.equals(rebate.rebateId) : rebate.rebateId != null) return false;
-        if (name != null ? !name.equals(rebate.name) : rebate.name != null) return false;
-        return products != null ? products.equals(rebate.products) : rebate.products == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = rebateId != null ? rebateId.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (products != null ? products.hashCode() : 0);
-        return result;
-    }
+//
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        Rebate rebate = (Rebate) o;
+//
+//        if (rebateId != null ? !rebateId.equals(rebate.rebateId) : rebate.rebateId != null) return false;
+//        if (name != null ? !name.equals(rebate.name) : rebate.name != null) return false;
+//        return products != null ? products.equals(rebate.products) : rebate.products == null;
+//
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        int result = rebateId != null ? rebateId.hashCode() : 0;
+//        result = 31 * result + (name != null ? name.hashCode() : 0);
+//        result = 31 * result + (products != null ? products.hashCode() : 0);
+//        return result;
+//    }
 }

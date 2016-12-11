@@ -87,30 +87,30 @@ public abstract class Product {
         this.rebates = rebates;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Product product = (Product) o;
-
-        if (productId != null ? !productId.equals(product.productId) : product.productId != null) return false;
-        if (name != null ? !name.equals(product.name) : product.name != null) return false;
-        if (description != null ? !description.equals(product.description) : product.description != null) return false;
-        if (price != null ? !price.equals(product.price) : product.price != null) return false;
-        return rebates != null ? rebates.equals(product.rebates) : product.rebates == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = productId != null ? productId.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (rebates != null ? rebates.hashCode() : 0);
-        return result;
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        Product product = (Product) o;
+//
+//        if (productId != null ? !productId.equals(product.productId) : product.productId != null) return false;
+//        if (name != null ? !name.equals(product.name) : product.name != null) return false;
+//        if (description != null ? !description.equals(product.description) : product.description != null) return false;
+//        if (price != null ? !price.equals(product.price) : product.price != null) return false;
+//        return rebates != null ? rebates.equals(product.rebates) : product.rebates == null;
+//
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        int result = productId != null ? productId.hashCode() : 0;
+//        result = 31 * result + (name != null ? name.hashCode() : 0);
+//        result = 31 * result + (description != null ? description.hashCode() : 0);
+//        result = 31 * result + (price != null ? price.hashCode() : 0);
+//        result = 31 * result + (rebates != null ? rebates.hashCode() : 0);
+//        return result;
+//    }
 
     public void addRebate(Rebate rebate) {
         rebates.add(rebate);
