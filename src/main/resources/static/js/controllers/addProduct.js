@@ -27,13 +27,6 @@ angular.module('pizzaShopManagementApp')
                 newProduct(self);
             };
 
-            $http.get(globalUrl +'product/read/all').then(function (response) {
-                self.allIngredients=[];
-                for(var i=0;i<response.data.length;i++){
-                    self.allIngredients.push(response.data[i]);
-                }
-            });
-
             getAllIngredients(self,$http);
             getAllIngredients(self,$http);
             getAllRebates(self,$http);
