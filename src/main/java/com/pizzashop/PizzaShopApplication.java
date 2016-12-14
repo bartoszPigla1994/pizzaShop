@@ -33,12 +33,12 @@ public class PizzaShopApplication extends WebMvcConfigurerAdapter{
 		SpringApplication.run(PizzaShopApplication.class, args);
 	}
 
-//	@Bean
-//	@Primary
-//	@ConfigurationProperties(prefix = "spring.datasource")
-//	public DataSource dataSource() {
-//		return DataSourceBuilder.create().build();
-//	}
+	@Bean
+	@Primary
+	@ConfigurationProperties(prefix = "spring.datasource")
+	public DataSource dataSource() {
+		return DataSourceBuilder.create().build();
+	}
 
 //	@Override
 //	public void addViewControllers(ViewControllerRegistry registry) {
@@ -50,11 +50,11 @@ public class PizzaShopApplication extends WebMvcConfigurerAdapter{
 //		registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
 //	}
 //
-//	@Override
-//	public void configurePathMatch(PathMatchConfigurer configurer) {
-//		super.configurePathMatch(configurer);
-//		configurer.setUseSuffixPatternMatch(false);
-//	}
+	@Override
+	public void configurePathMatch(PathMatchConfigurer configurer) {
+		super.configurePathMatch(configurer);
+		configurer.setUseSuffixPatternMatch(false);
+	}
 
 	@Bean
 	public BeanPrinter beanPrinter(){
