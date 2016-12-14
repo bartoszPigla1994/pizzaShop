@@ -1,92 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
-    <script
-            src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
-    <title>Wybierz produkt do usuniecia</title>
-</head>
-<body ng-app="deleteProductApp" ng-controller="deleteProductController">
-
-<nav class="navbar navbar-default" role="navigation" ng-include="'templates/headPanel.html'"></nav>
-<!--<p>{{selectedIdx}}</p>-->
-<!--<p>{{pageCount}}</p>-->
-<!--<p>{{collection}}</p>-->
-<div class="container-fluid">
-
-
-    <div id="myModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- dialog body -->
-                <div class="modal-body">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    Czy na pewno chcesz usunąć produkt?
-                </div>
-                <!-- dialog buttons -->
-                <div class="modal-footer">
-                    <button type="button" class="btn" data-dismiss="modal">Nie</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="deleteItem()">Tak</button>
-                </div>
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- dialog body -->
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                Czy na pewno chcesz usunąć produkt?
+            </div>
+            <!-- dialog buttons -->
+            <div class="modal-footer">
+                <button type="button" class="btn" data-dismiss="modal">Nie</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="deleteItem()">Tak
+                </button>
             </div>
         </div>
     </div>
-    <!--row-->
-    <div class="row">
-
-        <!--left-->
-        <div class="col-md-2" id="leftCol">
-            <div ng-include="'templates/filterPanel.html'"></div>
-        </div>
-        <!--/left-->
-        <!--right-->
-        <div class="col-md-9">
-            <!--<div class="alert alert-success fade in" ng-if="deleted == true">-->
-                <!--<a href="#" class="close" data-dismiss="alert">&times;</a> <strong>Operacja zakonczona-->
-                <!--powodzeniem!</strong>-->
-                <!--Pomyslnie usunieto produkt z menu-->
-            <!--</div>-->
-            <div class="alert alert-success fade in" ng-show="deleted">
-                <a class="close" ng-click="deleted=false">&times;</a> <strong>Operacja zakonczona
-                powodzeniem!</strong>
-                Pomyslnie usunieto produkt z menu
-            </div>
-            <div class="row">
-                <h2>Wybierz produkt do usuniecia</h2>
-
-                <div class="col-sm-6 col-md-3" ng-repeat="item in collection">
-                    <div ng-include="'templates/pizzaItem.html'" ng-if="item.type == 'pizza'"></div>
-                    <div ng-include="'templates/sauceItem.html'" ng-if="item.type == 'sos'"></div>
-                    <div ng-include="'templates/drinkItem.html'" ng-if="item.type == 'napoj'"></div>
-                </div>
-
-                <div class="container-fluid" ng-include="'templates/paginationPanel.html'"></div>
-            </div>
-            <!--/right-->
-        </div>
-
-
-        <!--/row-->
-    </div>
-    <!-- /.container-fluid -->
 </div>
+<!--row-->
+<div class="row">
 
-<script src="https://code.angularjs.org/1.2.13/angular.js"></script>
+    <!--left-->
+    <div class="col-md-2" id="leftCol">
+        <div ng-include="'templates/filterPanel.html'"></div>
+    </div>
+    <!--/left-->
+    <!--right-->
+    <div class="col-md-9">
+        <!--<div class="alert alert-success fade in" ng-if="deleted == true">-->
+        <!--<a href="#" class="close" data-dismiss="alert">&times;</a> <strong>Operacja zakonczona-->
+        <!--powodzeniem!</strong>-->
+        <!--Pomyslnie usunieto produkt z menu-->
+        <!--</div>-->
+        <div class="alert alert-success fade in" ng-show="deleted">
+            <a class="close" ng-click="deleted=false">&times;</a> <strong>Operacja zakonczona
+            powodzeniem!</strong>
+            Pomyslnie usunieto produkt z menu
+        </div>
+        <div class="row">
+            <h2>Wybierz produkt do usuniecia</h2>
 
-<script src="js/controllers/deleteProductApp.js"></script>
-<script src="js/models/product.js"></script>
-<script src="js/helpers/itemSelection.js"></script>
-<script src="js/getProductImage.js"></script>
-<script src="js/filterToggle.js"></script>
-<script src="js/toggleCheckBox.js"></script>
-<script src="js/initializeCheckBoxModel.js"></script>
-<script src="js/toggleAlertDialog.js"></script>
-</body>
-</html>
+            <div class="col-sm-6 col-md-3" ng-repeat="item in collection">
+                <div ng-include="'templates/pizzaItem.html'" ng-if="item.type == 'pizza'"></div>
+                <div ng-include="'templates/sauceItem.html'" ng-if="item.type == 'sos'"></div>
+                <div ng-include="'templates/drinkItem.html'" ng-if="item.type == 'napoj'"></div>
+            </div>
+
+            <div class="container-fluid" ng-include="'templates/paginationPanel.html'"></div>
+        </div>
+        <!--/right-->
+    </div>
+    <!--/row-->
+</div>

@@ -1,4 +1,3 @@
-
 function toggleDialog(){
 
     $("#myModal").on("show", function() {    // wire up the OK button to dismiss the modal when shown

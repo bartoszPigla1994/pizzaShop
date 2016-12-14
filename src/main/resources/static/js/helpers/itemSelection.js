@@ -1,32 +1,31 @@
-function initializeItemsSelection($scope, pageCount, pageSize, collectionFetcher){
-    $scope.selectedIdx=-1;
-    $scope.pageSize=pageSize;
-    $scope.pageCount=pageCount;
-    console.log('iis');
-    console.log($scope.selectedIdx);
+function initializeItemsSelection(self, itemsCount, pageSize, collectionGetter, $http){
+    self.selectedIdx=-1;
+    self.pageSize=pageSize;
+    self.pageCount=itemsCount/pageSize;
+
+    console.log('initializing item selection');
+    console.log(self.selectedIdx);
 
     var getCollection = function (pageNumber) {
-        $scope.pageNumber=pageNumber;
-        $scope.collection=collectionFetcher();
-        console.log($scope.collection);
+        self.pageNumber=pageNumber;
+        self.collection=collectionGetter($http, self);
+        console.log(self.collection);
     };
 
-    $scope.getCollection=getCollection;
+    self.getCollection=getCollection;
 
-    $scope.openItem= function (itemIndex) {
-        $scope.selectedIdx=itemIndex;
-        $scope.selectedItem=$scope.collection[$scope.selectedIdx];
-
-        initializeCheckBox($scope.selectedItem,$scope);
+    self.controller.openItem= function (itemIndex) {
+        self.selectedIdx=itemIndex;
+        self.selectedItem=self.collection[self.selectedIdx];
     };
 
     getCollection(1);
 
     var pages = [];
-    for (var i = 0; i < $scope.pageCount; i++) {
+    for (var i = 0; i < self.pageCount; i++) {
         console.log(pages);
         pages.push(i + 1);
     }
 
-    $scope.pages=pages;
+    self.pages=pages;
 }

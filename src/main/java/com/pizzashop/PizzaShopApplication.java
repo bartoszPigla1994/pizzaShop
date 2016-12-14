@@ -30,33 +30,31 @@ import java.util.List;
 @ComponentScan(basePackageClasses=PizzaController.class)
 public class PizzaShopApplication extends WebMvcConfigurerAdapter{
 	public static void main(String[] args) {
-
 		SpringApplication.run(PizzaShopApplication.class, args);
-
 	}
 
-	@Bean
-	@Primary
-	@ConfigurationProperties(prefix = "spring.datasource")
-	public DataSource dataSource() {
-		return DataSourceBuilder.create().build();
-	}
+//	@Bean
+//	@Primary
+//	@ConfigurationProperties(prefix = "spring.datasource")
+//	public DataSource dataSource() {
+//		return DataSourceBuilder.create().build();
+//	}
 
-	@Override
-	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/addProduct").setViewName("addProduct.html");
-		registry.addViewController("/deleteProduct").setViewName("deleteProduct.html");
-		registry.addViewController("/editProduct").setViewName("editProduct.html");
-		registry.addViewController("/complaintList").setViewName("complaintList.html");
-		registry.addViewController("/index").setViewName("index.html");
-		registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
-	}
-
-	@Override
-	public void configurePathMatch(PathMatchConfigurer configurer) {
-		super.configurePathMatch(configurer);
-		configurer.setUseSuffixPatternMatch(false);
-	}
+//	@Override
+//	public void addViewControllers(ViewControllerRegistry registry) {
+//		registry.addViewController("/addProduct").setViewName("addProduct.html");
+//		registry.addViewController("/deleteProduct").setViewName("deleteProduct.html");
+//		registry.addViewController("/editProduct").setViewName("editProduct.html");
+//		registry.addViewController("/readComplaint").setViewName("readComplaint.html");
+//		registry.addViewController("/index").setViewName("index.html");
+//		registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
+//	}
+//
+//	@Override
+//	public void configurePathMatch(PathMatchConfigurer configurer) {
+//		super.configurePathMatch(configurer);
+//		configurer.setUseSuffixPatternMatch(false);
+//	}
 
 	@Bean
 	public BeanPrinter beanPrinter(){

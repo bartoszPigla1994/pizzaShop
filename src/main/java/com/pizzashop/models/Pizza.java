@@ -70,7 +70,7 @@ public class Pizza extends Product{
 //
 //        if (doughType != null ? !doughType.equals(pizza.doughType) : pizza.doughType != null) return false;
 //        if (doughPrice != null ? !doughPrice.equals(pizza.doughPrice) : pizza.doughPrice != null) return false;
-//        return ingredients != null ? ingredients.equals(pizza.ingredients) : pizza.ingredients == null;
+//        return allSeasonings != null ? allSeasonings.equals(pizza.allSeasonings) : pizza.allSeasonings == null;
 //    }
 //
 //    @Override
@@ -78,7 +78,7 @@ public class Pizza extends Product{
 //        int result = super.hashCode();
 //        result = 31 * result + (doughType != null ? doughType.hashCode() : 0);
 //        result = 31 * result + (doughPrice != null ? doughPrice.hashCode() : 0);
-//        result = 31 * result + (ingredients != null ? ingredients.hashCode() : 0);
+//        result = 31 * result + (allSeasonings != null ? allSeasonings.hashCode() : 0);
 //        return result;
 //    }
 }
