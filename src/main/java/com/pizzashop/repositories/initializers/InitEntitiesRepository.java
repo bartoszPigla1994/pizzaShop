@@ -1,4 +1,4 @@
-package com.pizzashop.repositories;
+package com.pizzashop.repositories.initializers;
 
 import com.pizzashop.models.*;
 import org.springframework.stereotype.Repository;
@@ -9,8 +9,6 @@ import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-
-import static com.pizzashop.repositories.DbInitializer.*;
 
 /**
  * Created by barte on 30/12/2016.
@@ -29,17 +27,17 @@ public class InitEntitiesRepository {
     public Complaint complaint;
 
     @Transactional
-    public void st(){
-        for (Ingredient ingredient: createIngredients()
+    public void initializeProductSubComponents(){
+        for (Ingredient ingredient: DbInitializer.createIngredients()
              ) {
             entityManager.persist(ingredient);
         }
 
-        for (Seasoning seasoning : createSeasonings()){
+        for (Seasoning seasoning : DbInitializer.createSeasonings()){
             entityManager.persist(seasoning);
         }
 
-        rebate=createRebate();
+        rebate= DbInitializer.createRebate();
         entityManager.persist(rebate);
 
 //        rebate=createRebate();
@@ -67,14 +65,14 @@ public class InitEntitiesRepository {
         ingredients=new HashSet<>();
         ingredients.add(i1);
         rebate=entityManager.merge(rebate);
-        pizza=createPizza(ingredients,rebate);
+        pizza= DbInitializer.createPizza(ingredients,rebate);
 
         entityManager.persist(pizza);
     }
 
     @Transactional
     public void next2(){
-        ingredients=createIngredients();
+        ingredients= DbInitializer.createIngredients();
         Set<Ingredient> merged=new HashSet<>();
 
         for (Ingredient ingredient:ingredients
@@ -82,10 +80,10 @@ public class InitEntitiesRepository {
             merged.add(entityManager.merge(ingredient));
         }
 
-        rebate=createRebate();
+        rebate= DbInitializer.createRebate();
         rebate=entityManager.merge(rebate);
 
-        pizza=createPizza(merged,rebate);
+        pizza= DbInitializer.createPizza(merged,rebate);
 
         entityManager.persist(pizza);
     }

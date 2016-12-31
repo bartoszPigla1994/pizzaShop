@@ -3,6 +3,7 @@ package com.pizzashop.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.pizzashop.models.enums.DoughType;
+import com.pizzashop.repositories.listeners.PizzaListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import java.util.*;
  */
 @Entity
 @PrimaryKeyJoinColumn(name = "productId")
+@EntityListeners(PizzaListener.class)
 public class Pizza extends Product  implements Serializable {
     @Enumerated(EnumType.STRING)
     private DoughType doughType;
@@ -41,7 +43,7 @@ public class Pizza extends Product  implements Serializable {
     }
 
     @Basic
-    @Column(name = "doughType")
+    @Column(name = "doughTypes")
     public DoughType getDoughType() {
         return doughType;
     }

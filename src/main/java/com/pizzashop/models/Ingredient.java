@@ -1,6 +1,7 @@
 package com.pizzashop.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.pizzashop.models.interfaces.Nameable;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,7 +14,7 @@ import java.util.Set;
  * Created by barte on 09/12/2016.
  */
 @Entity
-public class Ingredient implements Serializable{
+public class Ingredient implements Serializable, Nameable{
     private Integer ingredientId;
     private String name;
 
@@ -69,4 +70,6 @@ public class Ingredient implements Serializable{
     public int hashCode() {
         return Objects.hash(name);
     }
+
+
 }

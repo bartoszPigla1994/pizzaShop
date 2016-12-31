@@ -17,9 +17,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.pizzashop.repositories.DbInitializer.createDrink;
-import static com.pizzashop.repositories.DbInitializer.createPizza;
-import static com.pizzashop.repositories.DbInitializer.createSauce;
+import static com.pizzashop.repositories.initializers.DbInitializer.createDrink;
+import static com.pizzashop.repositories.initializers.DbInitializer.createPizza;
+import static com.pizzashop.repositories.initializers.DbInitializer.createSauce;
 
 /**
  * Created by barte on 30/12/2016.
@@ -27,7 +27,7 @@ import static com.pizzashop.repositories.DbInitializer.createSauce;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = PizzaShopApplication.class)
 @WebAppConfiguration
-public class ProductRepositoryTest {
+public class ProductSaveTest {
     @Autowired
     ProductRepository productRepository;
 

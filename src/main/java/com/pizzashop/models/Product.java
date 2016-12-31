@@ -1,5 +1,7 @@
 package com.pizzashop.models;
 
+import com.pizzashop.models.interfaces.Nameable;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -13,7 +15,7 @@ import java.util.Set;
  */
 @Entity
 @Inheritance(strategy= InheritanceType.JOINED)
-public abstract class Product implements Serializable {
+public abstract class Product implements Serializable, Nameable {
     private Integer productId;
     private String name;
     private String description;

@@ -1,5 +1,8 @@
 package com.pizzashop.models;
 
+import com.pizzashop.repositories.listeners.DrinkListener;
+import com.pizzashop.repositories.listeners.PizzaListener;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -11,6 +14,7 @@ import java.util.Set;
  */
 @Entity
 @PrimaryKeyJoinColumn(name = "productId")
+@EntityListeners(DrinkListener.class)
 public class Drink extends Product  implements Serializable {
     private String literCount;
 

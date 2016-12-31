@@ -14,10 +14,6 @@ public class DrinkFilter extends ProductFilter {
         this.literCounts = literCounts;
     }
 
-    public DrinkFilter(Set<String> literCounts) {
-        this.literCounts = literCounts;
-    }
-
     public Set<String> getLiterCounts() {
         return literCounts;
     }
@@ -25,4 +21,6 @@ public class DrinkFilter extends ProductFilter {
     public void setLiterCounts(Set<String> literCounts) {
         this.literCounts = literCounts;
     }
+
+
 }

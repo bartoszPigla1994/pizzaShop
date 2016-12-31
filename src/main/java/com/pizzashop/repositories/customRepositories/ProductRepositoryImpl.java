@@ -1,4 +1,4 @@
-package com.pizzashop.repositories;
+package com.pizzashop.repositories.customRepositories;
 
 import com.pizzashop.exceptions.IngredientNotFoundException;
 import com.pizzashop.exceptions.RebateNotFoundException;

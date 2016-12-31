@@ -1,4 +1,4 @@
-package com.pizzashop.repositories;
+package com.pizzashop.repositories.customRepositories;
 
 import com.pizzashop.exceptions.IngredientNotFoundException;
 import com.pizzashop.exceptions.RebateNotFoundException;
@@ -14,4 +14,6 @@ public interface ProductRepositoryCustom {
     Pizza save(Pizza pizza) throws IngredientNotFoundException, RebateNotFoundException;
     Sauce save(Sauce sauce) throws SeasoningNotFoundException, RebateNotFoundException;
     Drink save(Drink drink) throws RebateNotFoundException;
+
+
 }

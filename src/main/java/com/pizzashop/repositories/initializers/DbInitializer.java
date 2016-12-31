@@ -1,4 +1,4 @@
-package com.pizzashop.repositories;
+package com.pizzashop.repositories.initializers;
 
 import com.pizzashop.models.*;
 import com.pizzashop.models.builders.*;
@@ -160,7 +160,7 @@ public class DbInitializer {
     @PostConstruct
     @Transactional
     public void initialize() {
-        repository.st();
+        repository.initializeProductSubComponents();
         //save();
     }
 

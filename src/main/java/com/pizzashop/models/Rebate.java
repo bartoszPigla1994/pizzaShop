@@ -1,6 +1,7 @@
 package com.pizzashop.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.pizzashop.models.interfaces.Nameable;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,7 +13,7 @@ import java.util.Set;
  * Created by barte on 10/12/2016.
  */
 @Entity
-public class Rebate  implements Serializable {
+public class Rebate  implements Serializable, Nameable {
     private Integer rebateId;
     private String name;
 

@@ -17,10 +17,6 @@ public class SauceFilter extends ProductFilter {
         this.seasonings = seasonings;
     }
 
-    public SauceFilter(Set<String> seasonings) {
-        this.seasonings = seasonings;
-    }
-
     public Set<String> getSeasonings() {
         return seasonings;
     }

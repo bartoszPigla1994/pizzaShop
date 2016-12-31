@@ -1,5 +1,7 @@
 package com.pizzashop.models;
 
+import com.pizzashop.models.interfaces.Nameable;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -8,7 +10,7 @@ import java.util.Objects;
  * Created by barte on 09/12/2016.
  */
 @Entity
-public class Seasoning  implements Serializable {
+public class Seasoning  implements Serializable, Nameable {
     private Integer seasoningId;
     private String name;
 

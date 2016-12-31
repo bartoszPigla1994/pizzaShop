@@ -1,7 +1,6 @@
 package com.pizzashop.productFilters;
 
 import com.pizzashop.annotations.Price;
-import com.pizzashop.models.enums.DoughType;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
@@ -20,21 +19,14 @@ public class PizzaFilter extends ProductFilter {
     protected BigDecimal doughMinPrice, doughMaxPrice;
 
     @NotEmpty
-    protected Set<DoughType> doughType;
+    protected Set<String> doughTypes;
 
-    public PizzaFilter(Set<String> rebates, Set<String> names, BigDecimal minPrice, BigDecimal maxPrice, Set<String> ingredients, BigDecimal doughMinPrice, BigDecimal doughMaxPrice, Set<DoughType> doughType) {
+    public PizzaFilter(Set<String> rebates, Set<String> names, BigDecimal minPrice, BigDecimal maxPrice, Set<String> ingredients, BigDecimal doughMinPrice, BigDecimal doughMaxPrice, Set<String> doughTypes) {
         super(rebates, names, minPrice, maxPrice);
         this.ingredients = ingredients;
         this.doughMinPrice = doughMinPrice;
         this.doughMaxPrice = doughMaxPrice;
-        this.doughType = doughType;
-    }
-
-    public PizzaFilter(Set<String> ingredients, BigDecimal doughMinPrice, BigDecimal doughMaxPrice, Set<DoughType> doughType) {
-        this.ingredients = ingredients;
-        this.doughMinPrice = doughMinPrice;
-        this.doughMaxPrice = doughMaxPrice;
-        this.doughType = doughType;
+        this.doughTypes = doughTypes;
     }
 
     public Set<String> getIngredients() {
@@ -61,11 +53,11 @@ public class PizzaFilter extends ProductFilter {
         this.doughMaxPrice = doughMaxPrice;
     }
 
-    public Set<DoughType> getDoughType() {
-        return doughType;
+    public Set<String> getDoughTypes() {
+        return doughTypes;
     }
 
-    public void setDoughType(Set<DoughType> doughType) {
-        this.doughType = doughType;
+    public void setDoughTypes(Set<String> doughTypes) {
+        this.doughTypes = doughTypes;
     }
 }

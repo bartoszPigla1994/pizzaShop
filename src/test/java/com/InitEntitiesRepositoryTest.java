@@ -7,7 +7,7 @@ import com.pizzashop.models.Pizza;
 import com.pizzashop.models.Rebate;
 import com.pizzashop.repositories.ClientRepository;
 import com.pizzashop.repositories.IngredientRepository;
-import com.pizzashop.repositories.InitEntitiesRepository;
+import com.pizzashop.repositories.initializers.InitEntitiesRepository;
 import com.pizzashop.repositories.PizzaRepository;
 import org.junit.Assert;
 import org.junit.Test;
@@ -20,7 +20,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.Set;
 
-import static com.pizzashop.repositories.DbInitializer.*;
+import static com.pizzashop.repositories.initializers.DbInitializer.*;
 
 /**
  * Created by barte on 30/12/2016.

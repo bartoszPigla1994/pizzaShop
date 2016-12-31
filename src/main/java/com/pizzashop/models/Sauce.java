@@ -1,5 +1,9 @@
 package com.pizzashop.models;
 
+import com.pizzashop.models.interfaces.Nameable;
+import com.pizzashop.repositories.listeners.PizzaListener;
+import com.pizzashop.repositories.listeners.SauceListener;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -13,7 +17,8 @@ import java.util.Set;
  */
 @Entity
 @PrimaryKeyJoinColumn(name = "productId")
-public class Sauce extends Product implements Serializable {
+@EntityListeners(SauceListener.class)
+public class Sauce extends Product implements Serializable, Nameable {
     private Set<Seasoning> seasonings=new HashSet<>();
 
     public Sauce(
