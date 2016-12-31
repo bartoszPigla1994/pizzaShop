@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.xml.ws.Response;
 import java.util.List;
 
 /**
@@ -28,7 +27,7 @@ public class IngredientController {
             return ResponseEntity.ok(ingredients);
         }
         catch (Exception exception){
-            return new ResponseEntity<List<Ingredient>>(ingredients, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(ingredients, HttpStatus.NO_CONTENT);
         }
     }
 }

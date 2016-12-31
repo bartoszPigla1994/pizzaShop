@@ -19,6 +19,7 @@ var getAllRebates=function (self,$http) {
         self.allRebates=[];
         for(var i=0;i<response.data.length;i++){
             self.allRebates.push(response.data[i]);
+            console.log(self.allRebates);
         }
     });
 };

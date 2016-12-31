@@ -1,7 +1,7 @@
-var getComplaints=function ($http, self) {
+var getComplaints = function ($http, self) {
     $http
         .get(
-            globalUrl +'complaint/read?pageSize='+self.pageSize+'&pageNumber='+self.pageNumber
+            globalUrl + 'complaint/read?pageSize=' + self.pageSize + '&pageNumber=' + self.pageNumber
         )
         .then(
             function successCallback(response) {
@@ -16,10 +16,10 @@ var getComplaints=function ($http, self) {
         );
 };
 
-var getComplaintsCount=function ($http) {
+var getComplaintsCount = function ($http) {
     $http
         .get(
-            globalUrl +'complaint/count'
+            globalUrl + 'complaint/count'
         )
         .then(
             function successCallback(response) {

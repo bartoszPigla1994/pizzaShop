@@ -24,11 +24,11 @@
             </thead>
             <tbody>
             <tr ng-repeat="complaint in collection">
-                <td>{{complaint.productOrder.client.eMail}}</td>
-                <td>{{complaint.productOrder.client.firstName}}</td>
-                <td>{{complaint.productOrder.client.surname}}</td>
-                <td>{{complaint.productOrder.price}}</td>
-                <td>{{complaint.productOrder.orderDate}}</td>
+                <td>{{complaint.order.client.eMail}}</td>
+                <td>{{complaint.order.client.firstName}}</td>
+                <td>{{complaint.order.client.surname}}</td>
+                <td>{{complaint.order.price}}</td>
+                <td>{{complaint.order.orderDate}}</td>
                 <td>{{complaint.submitDate}}</td>
                 <td></td>
                 <td>
@@ -57,21 +57,21 @@
             <tbody>
             <tr>
                 <td>Imie:</td>
-                <td>{{selectedItem.productOrder.client.firstName}}</td>
+                <td>{{selectedItem.order.client.firstName}}</td>
             </tr>
             <tr>
                 <td>Nazwisko</td>
-                <td>{{selectedItem.productOrder.client.surname}}</td>
+                <td>{{selectedItem.order.client.surname}}</td>
             </tr>
 
             <tr>
                 <td>E-mail</td>
-                <td>{{selectedItem.productOrder.client.eMail}}</td>
+                <td>{{selectedItem.order.client.eMail}}</td>
             </tr>
 
             <tr>
                 <td>Typ klienta</td>
-                <td>{{selectedItem.productOrder.client.clientType}}</td>
+                <td>{{selectedItem.order.client.clientType}}</td>
             </tr>
             </tbody>
         </table>
@@ -82,11 +82,11 @@
             <tbody>
             <tr>
                 <td>Cena zamowienia:</td>
-                <td>{{selectedItem.productOrder.price}}</td>
+                <td>{{selectedItem.order.price}}</td>
             </tr>
             <tr>
                 <td>Data zlozenia zamowienia</td>
-                <td>{{selectedItem.productOrder.orderDate}}</td>
+                <td>{{selectedItem.order.orderDate}}</td>
             </tr>
             <tr>
                 <td>Data zlozenia reklamacji</td>
@@ -104,7 +104,7 @@
             <th>Liczba</th>
             </thead>
             <tbody>
-            <tr ng-repeat="position in selectedItem.productOrder.orderPositionsList">
+            <tr ng-repeat="position in selectedItem.order.orderPositionsList">
                 <td>{{position.product.name}}</td>
                 <td>{{position.price}} zl</td>
                 <td>{{position.count}}</td>

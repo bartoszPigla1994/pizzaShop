@@ -1,139 +1,230 @@
 package com.pizzashop.repositories;
 
 import com.pizzashop.models.*;
+import com.pizzashop.models.builders.*;
+import com.pizzashop.models.enums.ClientType;
+import com.pizzashop.models.enums.ComplaintStatus;
+import com.pizzashop.models.enums.DoughType;
+import com.pizzashop.models.enums.ProductOrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
  * Created by barte on 09/12/2016.
  */
 public class DbInitializer {
-    @Autowired
-    IngredientRepository ingredientRepository;
 
     @Autowired
-    PizzaRepository pizzaRepository;
+    InitEntitiesRepository repository;
 
-    @Autowired
-    ClientRepository clientRepository;
+    public static Rebate createRebate() {
+        return new RebateBuilder()
+                .setName("2 w 1")
+                .createRebate();
+    }
 
-    @Autowired
-    ComplaintRepository complaintRepository;
+    public static Set<Seasoning> createSeasonings(){
+        Set<Seasoning> seasonings=new HashSet<>();
 
-    @Autowired
-    ProductOrderRepository productOrderRepository;
+        Seasoning pepper= new SeasoningBuilder()
+                .setName("pieperz")
+                .createSeasoning();
 
-    @Autowired
-    OrderPositionRepository orderPositionRepository;
+        Seasoning onion = new SeasoningBuilder()
+                .setName("cebula")
+                .createSeasoning();
 
-    @Autowired
-            RebateRepository rebateRepository;
+        seasonings.addAll(Arrays.asList(pepper,onion));
 
-    Set<Ingredient> ingredients = new HashSet<>();
+        return seasonings;
+    }
 
-    Pizza p1;
+    public static  Set<Ingredient> createIngredients() {
+        Set<Ingredient> ingredients=new HashSet<>();
 
-    Rebate rebate;
+        Ingredient sos = new IngredientBuilder()
+                .setName("sos")
+                .createIngredient();
 
-    public DbInitializer() {
+        Ingredient ser = new IngredientBuilder()
+                .setName("ser")
+                .createIngredient();
 
+        Ingredient szynka = new IngredientBuilder()
+                .setName("szynka")
+                .createIngredient();
 
-        Ingredient sos = new Ingredient();
-        sos.setName("sos");
+        Ingredient pomidor = new IngredientBuilder()
+                .setName("pomidor")
+                .createIngredient();
 
-        Ingredient ser = new Ingredient();
-        ser.setName("ser");
+        Ingredient pieczarki = new IngredientBuilder()
+                .setName("pieczarki")
+                .createIngredient();
+        ingredients.addAll(Arrays.asList(sos, ser, szynka, pomidor, pieczarki));
 
-        Ingredient szynka = new Ingredient();
-        szynka.setName("szynka");
+        return ingredients;
+    }
 
-        Ingredient pomidor = new Ingredient();
-        szynka.setName("pomidor");
+    public static  Pizza createPizza(Set<Ingredient> ingredients, Rebate rebate) {
+        return new PizzaBuilder()
+                .setName("margheritta")
+                .setPrice(new BigDecimal("14.32"))
+                .addRebates(rebate)
+                .setDescription("description")
+                .setDoughType(DoughType.cienkie)
+                .setDoughPrice(new BigDecimal("2.43"))
+                .setIngredients(ingredients)
+                .createPizza();
+    }
 
-        Ingredient pieczarki = new Ingredient();
-        szynka.setName("pieczarki");
+    public static Sauce createSauce(Set<Seasoning> seasonings, Rebate rebate){
+        return new SauceBuilder()
+                .setName("pomidorowy")
+                .setDescription("opis")
+                .setPrice(new BigDecimal("1.34"))
+                .addRebates(rebate)
+                .setSeasonings(seasonings)
+                .createSauce();
+    }
 
-        ingredients.add(sos);
-        ingredients.add(ser);
-        ingredients.add(szynka);
-        ingredients.add(pomidor);
-        ingredients.add(pieczarki);
+    public static Drink createDrink(Rebate rebate){
+        return new DrinkBuilder()
+                .setName("cola")
+                .setDescription("opis")
+                .setPrice(new BigDecimal("4.32"))
+                .setLiterCount("0.33")
+                .addRebates(rebate)
+                .createDrink();
+    }
 
-        rebate = new Rebate();
-        rebate.setName("2 w 1");
+    public static  Client createClient() {
+        return new ClientBuilder()
+                .setFirstName("bartosz")
+                .setSurname("ds")
+                .seteMail("bartek217a@wp.pl")
+                .setClientType(ClientType.normalny)
+                .createClient();
+    }
 
-        p1 = new Pizza();
-        p1.setName("marg");
-        p1.setIngredients(ingredients);
-        p1.setDoughPrice(new BigDecimal("12.43"));
+    public  static Order createOrder(Client client) {
+        return new OrderBuilder()
+                .setProductOrderStatus(ProductOrderStatus.w_drodze)
+                .setPrice(new BigDecimal("32.34"))
+                .setAddress("sd")
+                .setClient(client)
+                .setReceiptDate(new java.sql.Date((new java.util.Date()).getTime()))
+                .setOrderDate(new java.sql.Date((new java.util.Date()).getTime()))
+                .createOrder();
+    }
 
+    public  static Set<OrderPosition> createOrderPositions(Order order, Product product, Rebate rebate) {
+        Set<OrderPosition> orderPositions = new HashSet<>();
 
+        orderPositions.addAll(Arrays.asList(
+                new OrderPositionBuilder()
+                        .setCount(1)
+                        .setPrice(new BigDecimal("21.32"))
+                        .setProduct(product)
+                        .setRebate(rebate)
+                        .setOrder(order)
+                        .createOrderPosition(),
+
+                new OrderPositionBuilder()
+                        .setCount(2)
+                        .setPrice(new BigDecimal("11.32"))
+                        .setProduct(product)
+                        .setRebate(rebate)
+                        .setOrder(order)
+                        .createOrderPosition()
+        ));
+
+        return orderPositions;
+    }
+
+    public  static Complaint createComplaint(Order order) {
+        return new ComplaintBuilder()
+                .setComment("comment")
+                .setOrder(order)
+                .setSubmitDate(new java.sql.Date((new java.util.Date()).getTime()))
+                .setComplaintStatus(ComplaintStatus.odrzucone)
+                .createComplaint();
     }
 
     @PostConstruct
+    @Transactional
     public void initialize() {
-        List<Ingredient> ingredientList = ingredientRepository.findAll();
-        {
-            for (Ingredient ingredient : ingredients
-                    ) {
-
-                System.out.println(ingredient);
-
-                if (!ingredientList.contains(ingredient))
-                    ingredientRepository.save(ingredient);
-
-            }
-        }
-        Set<Ingredient> ingredientSet = new HashSet<>(ingredientRepository.findAll());
-        p1.setIngredients(ingredientSet);
-
-        rebate=rebateRepository.save(rebate);
-        p1.addRebate(rebate);
-        p1=pizzaRepository.save(p1);
-
-        Client client = new Client();
-        client.setFirstName("bartosz");
-        client.setSurname("ds");
-        client.seteMail("bartek217a@wp.pl");
-        client.setClientType(ClientType.normalny);
-
-        client=clientRepository.save(client);
-
-        //List<OrderPosition> orderPositions=new ArrayList<>();
-
-        ProductOrder order = new ProductOrder();
-        order.setProductOrderStatus(ProductOrderStatus.w_drodze);
-        order.setPrice(new BigDecimal("32.34"));
-        order.setAddress("sd");
-        order.setClient(client);
-        order.setReceiptDate(new java.sql.Date((new java.util.Date()).getTime()));
-        order.setOrderDate(new java.sql.Date((new java.util.Date()).getTime()));
-
-        order = productOrderRepository.save(order);
-
-        OrderPosition op1 = new OrderPosition();
-        op1.setCount(1);
-        op1.setPrice(new BigDecimal("21.32"));
-        op1.setProduct(p1);
-        op1.setProductOrder(order);
-        op1.setRebate(rebate);
-
-        op1 = orderPositionRepository.save(op1);
-
-        Complaint complaint = new Complaint();
-        complaint.setComment("comment");
-        complaint.setProductOrder(order);
-        complaint.setSubmitDate(new java.sql.Date((new java.util.Date()).getTime()));
-        complaint.setComplaintStatus(ComplaintStatus.odrzucone);
-
-        complaint = complaintRepository.save(complaint);
-
-        System.out.println(complaint);
-        //op1.setProductOrder();
+        repository.st();
+        //save();
     }
+
+
+//    @PostConstruct
+//    public void initialize() {
+//        List<Ingredient> ingredientList = ingredientRepository.findAll();
+//        {
+//            for (Ingredient ingredient : ingredients
+//                    ) {
+//
+//                System.out.println(ingredient);
+//
+//                if (!ingredientList.contains(ingredient))
+//                    ingredientRepository.save(ingredient);
+//
+//            }
+//        }
+//        Set<Ingredient> ingredientSet = new HashSet<>(ingredientRepository.findAll());
+//        pizza1.setIngredients(ingredientSet);
+//
+//        rebate1 = rebateRepository.save(rebate1);
+//        pizza1.addRebate(rebate1);
+//        pizza1 = pizzaRepository.save(pizza1);
+//
+//        Client client = new ClientBuilder().createClient();
+//        client.setFirstName("bartosz");
+//        client.setSurname("ds");
+//        client.seteMail("bartek217a@wp.pl");
+//        client.setClientType(ClientType.normalny);
+//
+//        client = clientRepository.save(client);
+//
+//        //List<OrderPosition> orderPositions=new ArrayList<>();
+//
+//        Order order = new OrderBuilder().createOrder();
+//        order.setProductOrderStatus(ProductOrderStatus.w_drodze);
+//        order.setPrice(new BigDecimal("32.34"));
+//        order.setAddress("sd");
+//        order.setClient(client);
+//        order.setReceiptDate(new java.sql.Date((new java.util.Date()).getTime()));
+//        order.setOrderDate(new java.sql.Date((new java.util.Date()).getTime()));
+//
+//        order = productOrderRepository.save(order);
+//
+//        OrderPosition op1 = new OrderPositionBuilder().createOrderPosition();
+//        op1.setCount(1);
+//        op1.setPrice(new BigDecimal("21.32"));
+//        op1.setProduct(pizza1);
+//        op1.setOrder(order);
+//        op1.setRebate(rebate1);
+//
+//        op1 = orderPositionRepository.save(op1);
+//
+//        Complaint complaint = new ComplaintBuilder().createComplaint();
+//        complaint.setComment("comment");
+//        complaint.setOrder(order);
+//        complaint.setSubmitDate(new java.sql.Date((new java.util.Date()).getTime()));
+//        complaint.setComplaintStatus(ComplaintStatus.odrzucone);
+//
+//        complaint = complaintRepository.save(complaint);
+//
+//        System.out.println(complaint);
+//        //op1.setOrder();
+//    }
+
 }

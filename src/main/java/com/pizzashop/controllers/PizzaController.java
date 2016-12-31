@@ -1,6 +1,5 @@
 package com.pizzashop.controllers;
 
-import com.pizzashop.models.Ala;
 import com.pizzashop.models.Ingredient;
 import com.pizzashop.models.Pizza;
 import com.pizzashop.repositories.IngredientRepository;
@@ -11,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,10 +29,6 @@ public class PizzaController {
 //    @Autowired
 //    IngredientRepository ingredientRepository;
 
-    @RequestMapping("/foo")
-    public Ala foo(@RequestBody Ala ala){
-        return ala;
-    }
 
     @RequestMapping(value = "/read", method = RequestMethod.GET)
     public ResponseEntity<List<Pizza>> read(
@@ -107,7 +101,7 @@ public class PizzaController {
             return new ResponseEntity<>(pizza, HttpStatus.OK);
         }
         catch (Exception exc){
-            return new ResponseEntity<>(pizza, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(pizza, HttpStatus.BAD_REQUEST);
         }
     }
 }

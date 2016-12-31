@@ -3,22 +3,28 @@ package com.pizzashop.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
  * Created by barte on 10/12/2016.
  */
 @Entity
-public class Rebate {
+public class Rebate  implements Serializable {
     private Integer rebateId;
     private String name;
 
     @JsonIgnore
-    private Set<Product> products;
+    private Set<Product> products=new HashSet<>();
 
-    public Rebate(){
-        products=new HashSet<>();
+    public Rebate(String name, Set<Product> products) {
+        this.name = name;
+        this.products = products;
+    }
+
+    public Rebate() {
     }
 
     @Id
@@ -49,25 +55,17 @@ public class Rebate {
     public void setProducts(Set<Product> products) {
         this.products = products;
     }
-//
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//
-//        Rebate rebate = (Rebate) o;
-//
-//        if (rebateId != null ? !rebateId.equals(rebate.rebateId) : rebate.rebateId != null) return false;
-//        if (name != null ? !name.equals(rebate.name) : rebate.name != null) return false;
-//        return products != null ? products.equals(rebate.products) : rebate.products == null;
-//
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        int result = rebateId != null ? rebateId.hashCode() : 0;
-//        result = 31 * result + (name != null ? name.hashCode() : 0);
-//        result = 31 * result + (products != null ? products.hashCode() : 0);
-//        return result;
-//    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Rebate rebate = (Rebate) o;
+        return Objects.equals(name, rebate.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
 }

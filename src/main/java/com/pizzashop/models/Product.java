@@ -1,8 +1,11 @@
 package com.pizzashop.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -10,21 +13,30 @@ import java.util.Set;
  */
 @Entity
 @Inheritance(strategy= InheritanceType.JOINED)
-public abstract class Product {
+public abstract class Product implements Serializable {
     private Integer productId;
     private String name;
     private String description;
     private BigDecimal price;
-    private Set<Rebate> rebates;
-//    @Enumerated(EnumType.STRING)
-//    private ProductType type;
-    public Product(){
-        rebates=new HashSet<>();
+    private Set<Rebate> rebates=new HashSet<>();
+
+    public Product(){}
+
+    public Product(
+            String name,
+            String description,
+            BigDecimal price,
+            Set<Rebate> rebates
+    ){
+        this.name=name;
+        this.description=description;
+        this.price=price;
+        this.rebates=rebates;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "productId")
+    @Column(name = "productId", updatable = false, nullable = false)
     public Integer getProductId() {
         return productId;
     }
@@ -62,16 +74,6 @@ public abstract class Product {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
-//
-//    @Basic
-//    @Column(name = "type")
-//    public ProductType getType() {
-//        return type;
-//    }
-//
-//    public void setType(ProductType type) {
-//        this.type = type;
-//    }
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -87,32 +89,21 @@ public abstract class Product {
         this.rebates = rebates;
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//
-//        Product product = (Product) o;
-//
-//        if (productId != null ? !productId.equals(product.productId) : product.productId != null) return false;
-//        if (name != null ? !name.equals(product.name) : product.name != null) return false;
-//        if (description != null ? !description.equals(product.description) : product.description != null) return false;
-//        if (price != null ? !price.equals(product.price) : product.price != null) return false;
-//        return rebates != null ? rebates.equals(product.rebates) : product.rebates == null;
-//
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        int result = productId != null ? productId.hashCode() : 0;
-//        result = 31 * result + (name != null ? name.hashCode() : 0);
-//        result = 31 * result + (description != null ? description.hashCode() : 0);
-//        result = 31 * result + (price != null ? price.hashCode() : 0);
-//        result = 31 * result + (rebates != null ? rebates.hashCode() : 0);
-//        return result;
-//    }
-
     public void addRebate(Rebate rebate) {
         rebates.add(rebate);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(name, product.name) &&
+                Objects.equals(price, product.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, price);
     }
 }

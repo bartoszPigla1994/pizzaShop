@@ -1,4 +1,4 @@
-package com.pizzashop.models;
+package com.pizzashop.models.enums;
 
 /**
  * Created by barte on 10/12/2016.

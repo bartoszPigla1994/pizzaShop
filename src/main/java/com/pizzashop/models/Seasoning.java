@@ -1,14 +1,23 @@
 package com.pizzashop.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Created by barte on 09/12/2016.
  */
 @Entity
-public class Seasoning {
+public class Seasoning  implements Serializable {
     private Integer seasoningId;
     private String name;
+
+    public Seasoning(String name) {
+        this.name = name;
+    }
+
+    public Seasoning() {
+    }
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "seasoningId")
@@ -29,24 +38,17 @@ public class Seasoning {
     public void setName(String name) {
         this.name = name;
     }
-//
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//
-//        Seasoning that = (Seasoning) o;
-//
-//        if (seasoningId != null ? !seasoningId.equals(that.seasoningId) : that.seasoningId != null) return false;
-//        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-//
-//        return true;
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        int result = seasoningId != null ? seasoningId.hashCode() : 0;
-//        result = 31 * result + (name != null ? name.hashCode() : 0);
-//        return result;
-//    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Seasoning seasoning = (Seasoning) o;
+        return Objects.equals(name, seasoning.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
 }

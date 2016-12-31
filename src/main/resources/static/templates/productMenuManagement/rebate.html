@@ -9,3 +9,14 @@
 <div class="radio">
     <label><input type="radio" name="optradio" ng-model="controller.selectedItem.rebate" value="50% znizki za 3 duza pizze">50% znizki za 3 duza pizze</label>
 </div>
+
+
+
+
+<div class="span3" ng-repeat="rebate in allRebates">
+    <label>
+        <input type="checkbox" checklist-model="controller.selectedItem.rebates" checklist-value="rebate"/>
+        {{ingredient.name}}
+
+    </label>
+</div>

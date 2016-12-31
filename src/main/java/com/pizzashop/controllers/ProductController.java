@@ -2,7 +2,6 @@ package com.pizzashop.controllers;
 
 import com.pizzashop.models.Product;
 import com.pizzashop.repositories.ProductBaseRepository;
-import com.pizzashop.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -20,8 +19,6 @@ public class ProductController {
     @Autowired
     ProductBaseRepository productRepository;
 
-
-
     @RequestMapping(value = "/read", method = RequestMethod.GET)
     public ResponseEntity<List<Product>> read(
             @RequestParam(value = "pageSize", required = true) Integer pageSize,
@@ -36,7 +33,7 @@ public class ProductController {
             return new ResponseEntity<>(productList, HttpStatus.OK);
         }
         catch (Exception exception){
-            return new ResponseEntity<>(productList, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(productList, HttpStatus.NO_CONTENT);
         }
     }
 

@@ -11,3 +11,5 @@ import org.springframework.transaction.annotation.Transactional;
 public interface IngredientRepository  extends JpaRepository<Ingredient,Integer>{
     Ingredient findIngredientByName(String name);
 }
+
+

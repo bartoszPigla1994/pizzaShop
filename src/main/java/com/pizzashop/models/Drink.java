@@ -1,15 +1,31 @@
 package com.pizzashop.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * Created by barte on 09/12/2016.
  */
 @Entity
 @PrimaryKeyJoinColumn(name = "productId")
-public class Drink extends Product {
+public class Drink extends Product  implements Serializable {
     private String literCount;
+
+    public Drink(
+            String name,
+            String description,
+            BigDecimal price,
+            Set<Rebate> rebates,
+            String literCount){
+        super(name,description,price,rebates);
+        this.literCount=literCount;
+    }
+
+    public Drink(){}
+
     @Basic
     @Column(name = "literCount")
     public String getLiterCount() {
@@ -19,6 +35,4 @@ public class Drink extends Product {
     public void setLiterCount(String literCount) {
         this.literCount = literCount;
     }
-
-
 }

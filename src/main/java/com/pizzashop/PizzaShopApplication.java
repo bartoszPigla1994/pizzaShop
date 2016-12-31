@@ -1,33 +1,25 @@
 package com.pizzashop;
 
 import com.pizzashop.controllers.PizzaController;
-import com.pizzashop.models.Sauce;
 import com.pizzashop.repositories.DbInitializer;
-import com.pizzashop.repositories.SauceRepository;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.orm.jpa.EntityScan;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.*;
-import org.springframework.core.Ordered;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-import java.util.List;
 
 @SpringBootApplication
 @Configuration
-@ComponentScan(basePackageClasses=PizzaController.class)
+@ComponentScan(basePackageClasses={PizzaController.class, DbInitializer.class})
+@EnableTransactionManagement
 public class PizzaShopApplication extends WebMvcConfigurerAdapter{
 	public static void main(String[] args) {
 		SpringApplication.run(PizzaShopApplication.class, args);
@@ -66,6 +58,34 @@ public class PizzaShopApplication extends WebMvcConfigurerAdapter{
 		return new DbInitializer();
 	}
 
+//	@Bean
+//	public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
+//		JpaTransactionManager transactionManager = new JpaTransactionManager(emf);
+//
+//		return transactionManager;
+//	}
+//
+//	@Bean
+//	public LocalContainerEntityManagerFactoryBean entityManagerFactory
+//			(DataSource dataSource, JpaVendorAdapter jpaVendeorAdapter)
+//	{
+//		LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
+//		entityManagerFactory.setDataSource(dataSource);
+//		entityManagerFactory.setJpaVendorAdapter(jpaVendeorAdapter);
+//		entityManagerFactory.setPackagesToScan("com.pizzashop.models");
+//		return entityManagerFactory;
+//	}
+//
+//	@Bean
+//	public JpaVendorAdapter jpaVendorAdapter()
+//	{
+//		HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
+//		adapter.setShowSql(true);
+//		adapter.setGenerateDdl(false);
+//		adapter.setDatabasePlatform("org.hibernate.dialect.MySQLDialect");
+//
+//		return adapter;
+//	}
 //	@Bean
 //	public HibernateJpaSessionFactoryBean sessionFactory() {
 //		return new HibernateJpaSessionFactoryBean();

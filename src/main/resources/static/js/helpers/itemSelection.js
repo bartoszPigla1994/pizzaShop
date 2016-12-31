@@ -14,7 +14,7 @@ function initializeItemsSelection(self, itemsCount, pageSize, collectionGetter, 
 
     self.getCollection=getCollection;
 
-    self.controller.openItem= function (itemIndex) {
+    self.openItem= function (itemIndex) {
         self.selectedIdx=itemIndex;
         self.selectedItem=self.collection[self.selectedIdx];
     };

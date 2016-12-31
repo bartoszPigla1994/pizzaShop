@@ -1,7 +1,10 @@
 package com.pizzashop.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -10,14 +13,24 @@ import java.util.Set;
  */
 @Entity
 @PrimaryKeyJoinColumn(name = "productId")
-public class Sauce extends Product{
-    private Set<Seasoning> seasonings;
+public class Sauce extends Product implements Serializable {
+    private Set<Seasoning> seasonings=new HashSet<>();
 
-    public Sauce(){
-        seasonings =new HashSet<>();
+    public Sauce(
+            String name,
+            String description,
+            BigDecimal price,
+            Set<Rebate> rebates,
+            Set<Seasoning> seasonings){
+        super(name,description,price,rebates);
+        this.seasonings=seasonings;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    public Sauce(){
+
+    }
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "SauceSeasonings",
             joinColumns = @JoinColumn(name = "sauceId", referencedColumnName = "productId"),
@@ -34,20 +47,4 @@ public class Sauce extends Product{
     public void addSeasoning(Seasoning seasoning){
         seasonings.add(seasoning);
     }
-
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//
-//        Sauce sauce = (Sauce) o;
-//
-//        return seasonings != null ? seasonings.equals(sauce.seasonings) : sauce.seasonings == null;
-//
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return seasonings != null ? seasonings.hashCode() : 0;
-//    }
 }

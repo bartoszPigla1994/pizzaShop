@@ -1,18 +1,18 @@
 package com.pizzashop.models;
 
+import com.pizzashop.models.enums.ProductOrderStatus;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by barte on 09/12/2016.
  */
-@Entity
-public class ProductOrder {
+@Entity(name = "ProductOrder")
+public class Order  implements Serializable {
     private Integer productOrderId;
     private Date orderDate;
     private String address;
@@ -23,10 +23,19 @@ public class ProductOrder {
     @Enumerated(EnumType.STRING)
     private ProductOrderStatus productOrderStatus;
 
-    private Set<OrderPosition> orderPositions;
+    private Set<OrderPosition> orderPositions=new HashSet<>();
 
-    public ProductOrder(){
-        orderPositions =new HashSet<>();
+    public Order(Date orderDate, String address, Date receiptDate, BigDecimal price, Client client, ProductOrderStatus productOrderStatus, Set<OrderPosition> orderPositions) {
+        this.orderDate = orderDate;
+        this.address = address;
+        this.receiptDate = receiptDate;
+        this.price = price;
+        this.client = client;
+        this.productOrderStatus = productOrderStatus;
+        this.orderPositions = orderPositions;
+    }
+
+    public Order() {
     }
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -79,8 +88,7 @@ public class ProductOrder {
         this.price = price;
     }
 
-
-    @OneToMany(mappedBy = "productOrder", fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     public Set<OrderPosition> getOrderPositions() {
         return orderPositions;
     }
@@ -88,7 +96,8 @@ public class ProductOrder {
     public void setOrderPositions(Set<OrderPosition> orderPositionsList) {
         this.orderPositions = orderPositionsList;
     }
-    @ManyToOne(fetch = FetchType.EAGER)
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "Client_clientId", referencedColumnName = "clientId", nullable = false)
     public Client getClient() {
         return client;
@@ -111,36 +120,18 @@ public class ProductOrder {
     public void setProductOrderStatus(ProductOrderStatus productOrderStatus) {
         this.productOrderStatus = productOrderStatus;
     }
-//
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//
-//        ProductOrder that = (ProductOrder) o;
-//
-//        if (productOrderId != null ? !productOrderId.equals(that.productOrderId) : that.productOrderId != null)
-//            return false;
-//        if (orderDate != null ? !orderDate.equals(that.orderDate) : that.orderDate != null) return false;
-//        if (address != null ? !address.equals(that.address) : that.address != null) return false;
-//        if (receiptDate != null ? !receiptDate.equals(that.receiptDate) : that.receiptDate != null) return false;
-//        if (price != null ? !price.equals(that.price) : that.price != null) return false;
-//        if (client != null ? !client.equals(that.client) : that.client != null) return false;
-//        if (productOrderStatus != that.productOrderStatus) return false;
-//        return orderPositions != null ? orderPositions.equals(that.orderPositions) : that.orderPositions == null;
-//
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        int result = productOrderId != null ? productOrderId.hashCode() : 0;
-//        result = 31 * result + (orderDate != null ? orderDate.hashCode() : 0);
-//        result = 31 * result + (address != null ? address.hashCode() : 0);
-//        result = 31 * result + (receiptDate != null ? receiptDate.hashCode() : 0);
-//        result = 31 * result + (price != null ? price.hashCode() : 0);
-//        result = 31 * result + (client != null ? client.hashCode() : 0);
-//        result = 31 * result + (productOrderStatus != null ? productOrderStatus.hashCode() : 0);
-//        result = 31 * result + (orderPositions != null ? orderPositions.hashCode() : 0);
-//        return result;
-//    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return Objects.equals(client, order.client) &&
+                Objects.equals(orderPositions, order.orderPositions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(client, orderPositions);
+    }
 }
