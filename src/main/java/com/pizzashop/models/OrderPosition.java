@@ -1,8 +1,11 @@
 package com.pizzashop.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.pizzashop.annotations.Price;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -13,11 +16,21 @@ import java.util.Objects;
 @Entity
 public class OrderPosition  implements Serializable {
     private Integer orderPositionId;
+
+    @NotNull
+    @Range(min = 0, max = 10)
     private Integer count;
+
+    @NotNull
+    @Price
     private BigDecimal price;
+
     @JsonIgnore
+    @NotNull
     private Order order;
+    @NotNull
     private Product product;
+    @NotNull
     private Rebate rebate;
 
     public OrderPosition(Integer count, BigDecimal price, Order order, Product product, Rebate rebate) {

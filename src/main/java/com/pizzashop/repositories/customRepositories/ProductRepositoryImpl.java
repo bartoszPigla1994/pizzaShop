@@ -4,6 +4,7 @@ import com.pizzashop.exceptions.IngredientNotFoundException;
 import com.pizzashop.exceptions.RebateNotFoundException;
 import com.pizzashop.exceptions.SeasoningNotFoundException;
 import com.pizzashop.models.*;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ import java.util.Set;
 /**
  * Created by barte on 30/12/2016.
  */
+@Component
 @Repository
 @Transactional
 public class ProductRepositoryImpl implements ProductRepositoryCustom {

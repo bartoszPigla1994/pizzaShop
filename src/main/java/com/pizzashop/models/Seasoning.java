@@ -1,8 +1,10 @@
 package com.pizzashop.models;
 
 import com.pizzashop.models.interfaces.Nameable;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -12,6 +14,9 @@ import java.util.Objects;
 @Entity
 public class Seasoning  implements Serializable, Nameable {
     private Integer seasoningId;
+
+    @NotNull
+    @Length(max = 30)
     private String name;
 
     public Seasoning(String name) {

@@ -1,8 +1,13 @@
 package com.pizzashop.models;
 
+import com.pizzashop.annotations.Price;
 import com.pizzashop.models.enums.ProductOrderStatus;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -14,15 +19,26 @@ import java.util.*;
 @Entity(name = "ProductOrder")
 public class Order  implements Serializable {
     private Integer productOrderId;
-    private Date orderDate;
+
+    @DateTimeFormat(pattern = "dd-mm-yyyy hh:mm:ss")
+    @NotNull
+    private Date orderDate,receiptDate;
+
+    @NotNull
+    @Length(max=255)
     private String address;
-    private Date receiptDate;
+
+    @NotNull
+    @Price
     private BigDecimal price;
+    @NotNull
     private Client client;
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private ProductOrderStatus productOrderStatus;
 
+    @NotEmpty
     private Set<OrderPosition> orderPositions=new HashSet<>();
 
     public Order(Date orderDate, String address, Date receiptDate, BigDecimal price, Client client, ProductOrderStatus productOrderStatus, Set<OrderPosition> orderPositions) {

@@ -2,10 +2,12 @@ package com.pizzashop.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.pizzashop.annotations.Price;
 import com.pizzashop.models.enums.DoughType;
-import com.pizzashop.repositories.listeners.PizzaListener;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.*;
@@ -15,12 +17,16 @@ import java.util.*;
  */
 @Entity
 @PrimaryKeyJoinColumn(name = "productId")
-@EntityListeners(PizzaListener.class)
 public class Pizza extends Product  implements Serializable {
     @Enumerated(EnumType.STRING)
+    @NotNull
     private DoughType doughType;
+
+    @NotNull
+    @Price
     private BigDecimal doughPrice;
 
+    @NotEmpty
     private Set<Ingredient> ingredients=new HashSet<>();
 
     public Pizza(

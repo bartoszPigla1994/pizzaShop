@@ -1,8 +1,7 @@
 package com.pizzashop.models;
 
 import com.pizzashop.models.interfaces.Nameable;
-import com.pizzashop.repositories.listeners.PizzaListener;
-import com.pizzashop.repositories.listeners.SauceListener;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,8 +16,9 @@ import java.util.Set;
  */
 @Entity
 @PrimaryKeyJoinColumn(name = "productId")
-@EntityListeners(SauceListener.class)
 public class Sauce extends Product implements Serializable, Nameable {
+
+    @NotEmpty
     private Set<Seasoning> seasonings=new HashSet<>();
 
     public Sauce(

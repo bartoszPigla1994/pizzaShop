@@ -1,8 +1,11 @@
 package com.pizzashop.models;
 
 import com.pizzashop.models.enums.ComplaintStatus;
+import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
@@ -13,11 +16,18 @@ import java.util.Objects;
 @Entity
 public class Complaint  implements Serializable {
     private Integer complaintId;
+
+    @DateTimeFormat(pattern = "dd-mm-yyyy hh:mm:ss")
     private Date submitDate;
+
+    @NotNull    @Length(max=255)
     private String comment;
+
+    @NotNull
     private Order order;
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private ComplaintStatus complaintStatus;
 
     public Complaint(Date submitDate, String comment, Order order, ComplaintStatus complaintStatus) {

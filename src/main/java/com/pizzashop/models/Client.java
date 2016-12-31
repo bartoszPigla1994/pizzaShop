@@ -1,8 +1,12 @@
 package com.pizzashop.models;
 
 import com.pizzashop.models.enums.ClientType;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -12,8 +16,12 @@ import java.util.Objects;
 @Entity
 public class Client implements Serializable {
     private Integer clientId;
-    private String firstName;
-    private String surname;
+    @NotNull
+    @Length(max=30)
+    private String firstName, surname;
+    @NotNull
+    @Email
+    @Length(max=255)
     private String eMail;
 
     @Enumerated(EnumType.STRING)

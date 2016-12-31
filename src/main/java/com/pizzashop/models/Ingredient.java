@@ -2,8 +2,10 @@ package com.pizzashop.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pizzashop.models.interfaces.Nameable;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -16,6 +18,8 @@ import java.util.Set;
 @Entity
 public class Ingredient implements Serializable, Nameable{
     private Integer ingredientId;
+
+    @NotNull    @Length(max=20)
     private String name;
 
     @JsonIgnore

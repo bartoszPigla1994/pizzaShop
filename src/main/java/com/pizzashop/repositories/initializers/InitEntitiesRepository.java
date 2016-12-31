@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.pizzashop.repositories.initializers.DbInitializer.createPizza;
+import static com.pizzashop.repositories.initializers.DbInitializer.createRebate;
+
 /**
  * Created by barte on 30/12/2016.
  */
@@ -18,12 +21,13 @@ public class InitEntitiesRepository {
     @PersistenceContext
     EntityManager entityManager;
 
-    public Set<Ingredient> ingredients;
+    public Set<Ingredient> ingredients = new HashSet<>();
+    public Set<Seasoning> seasonings= new HashSet<>();
     public Rebate rebate;
     public Pizza pizza;
     public Client client;
     public Order order;
-    public Set<OrderPosition> orderPositions;
+    public Set<OrderPosition> orderPositions= new HashSet<>();
     public Complaint complaint;
 
     @Transactional
@@ -31,14 +35,18 @@ public class InitEntitiesRepository {
         for (Ingredient ingredient: DbInitializer.createIngredients()
              ) {
             entityManager.persist(ingredient);
+            ingredients.add(ingredient);
         }
 
         for (Seasoning seasoning : DbInitializer.createSeasonings()){
             entityManager.persist(seasoning);
+            seasonings.add(seasoning);
         }
 
-        rebate= DbInitializer.createRebate();
+        rebate= createRebate();
         entityManager.persist(rebate);
+
+        entityManager.flush();
 
 //        rebate=createRebate();
 //
@@ -59,13 +67,28 @@ public class InitEntitiesRepository {
     }
 
     @Transactional
+    public void initializePizza(){
+        Set<Ingredient> persistedIngredients = new HashSet<>();
+        for (Ingredient ingredient: ingredients){
+            persistedIngredients.add(entityManager.merge(ingredient));
+        }
+
+        rebate = entityManager.merge(rebate);
+
+        pizza = createPizza(persistedIngredients, rebate);
+
+        entityManager.persist(pizza);
+        entityManager.flush();
+    }
+
+    @Transactional
     public void next(){
         Ingredient i1 = new ArrayList<>(ingredients).get(0);
         i1= entityManager.merge(i1);
         ingredients=new HashSet<>();
         ingredients.add(i1);
         rebate=entityManager.merge(rebate);
-        pizza= DbInitializer.createPizza(ingredients,rebate);
+        pizza= createPizza(ingredients,rebate);
 
         entityManager.persist(pizza);
     }
@@ -80,10 +103,10 @@ public class InitEntitiesRepository {
             merged.add(entityManager.merge(ingredient));
         }
 
-        rebate= DbInitializer.createRebate();
+        rebate= createRebate();
         rebate=entityManager.merge(rebate);
 
-        pizza= DbInitializer.createPizza(merged,rebate);
+        pizza= createPizza(merged,rebate);
 
         entityManager.persist(pizza);
     }

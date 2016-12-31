@@ -20,30 +20,6 @@ import java.util.Set;
 public class ProductFilterInitializer {
     @Autowired
     FilterRepository filterRepository;
-//    @Autowired
-//    PizzaRepository pizzaRepository;
-//
-//    @Autowired
-//    SauceRepository sauceRepository;
-//
-//    @Autowired
-//    DrinkRepository drinkRepository;
-//
-//    @Autowired
-//    IngredientRepository ingredientRepository;
-//
-//    @Autowired
-//    SeasoningRepository seasoningRepository;
-//
-//    @Autowired
-//    RebateRepository rebateRepository;
-//
-//    <T extends ProductFilterBuilder> ProductFilterBuilder createProductFilter(ProductFilterBuilder<T> productFilterBuilder, INames productNames, INames rebateNames){
-//        return (T) productFilterBuilder
-//                .setRebates(getNames(rebateNames))
-//                .setNames(getNames(productNames));
-//
-//    }
 
     public <T extends Nameable> Set<String> getNames(Class<T> cl){
         return filterRepository.getNames(cl);
@@ -73,37 +49,6 @@ public class ProductFilterInitializer {
                 .setLiterCounts(filterRepository.getLiterCounts())
                 .createDrinkFilter();
     }
-
-//    public PizzaFilter createPizzaFilter() {
-//        return new PizzaFilterBuilder()
-//                .setNames(getNames(sauceRepository.findNames()))
-//                .setRebates(getNames(rebateRepository.findNames()))
-//                .setDoughTypes(DoughType.names())
-//                .setIngredients(getNames(ingredientRepository.findNames()))
-//                .createPizzaFilter();
-//    }
-//
-//    public SauceFilter createSauceFilter() {
-//        return new SauceFilterBuilder()
-//                .setNames(getNames(sauceRepository.findNames()))
-//                .setRebates(getNames(rebateRepository.findNames()))
-//                .setSeasonings(getNames(seasoningRepository.findNames()))
-//                .createSauceFilter();
-//    }
-//
-//    public DrinkFilter createDrinkFilter() {
-//        return new DrinkFilterBuilder()
-//                .setNames(getNames(drinkRepository.findNames()))
-//                .setRebates(getNames(rebateRepository.findNames()))
-//                .setLiterCounts(getNames(drinkRepository.findNames()))
-//                .createDrinkFilter();
-//    }
-//
-//    Set<String> getNames(List<String> names) {
-//        //List<Nameable> list = repository.findAll()
-//        return new HashSet<>(names);
-//    }
-
 
     public void updatePizzaFilter(PizzaFilter pizzaFilter) {
         PizzaFilter newPizzaFilter=createPizzaFilter();

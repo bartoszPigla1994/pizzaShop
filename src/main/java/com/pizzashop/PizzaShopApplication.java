@@ -4,8 +4,10 @@ import com.pizzashop.controllers.PizzaController;
 import com.pizzashop.productFilters.DrinkFilter;
 import com.pizzashop.productFilters.PizzaFilter;
 import com.pizzashop.productFilters.SauceFilter;
+import com.pizzashop.repositories.customRepositories.ProductRepositoryImpl;
 import com.pizzashop.repositories.initializers.DbInitializer;
 import com.pizzashop.repositories.initializers.ProductFilterInitializer;
+import com.pizzashop.repositories.listeners.FilterChangedListener;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
@@ -19,7 +21,7 @@ import javax.sql.DataSource;
 
 @SpringBootApplication
 @Configuration
-@ComponentScan(basePackageClasses={PizzaController.class, DbInitializer.class})
+@ComponentScan(basePackageClasses={PizzaController.class, DbInitializer.class, FilterChangedListener.class, ProductRepositoryImpl.class})
 @EnableTransactionManagement
 public class PizzaShopApplication extends WebMvcConfigurerAdapter{
 	public static void main(String[] args) {

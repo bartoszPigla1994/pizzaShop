@@ -1,8 +1,12 @@
 package com.pizzashop.models;
 
+import com.pizzashop.annotations.Price;
 import com.pizzashop.models.interfaces.Nameable;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -14,26 +18,34 @@ import java.util.Set;
  * Created by barte on 09/12/2016.
  */
 @Entity
-@Inheritance(strategy= InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Product implements Serializable, Nameable {
     private Integer productId;
+    @NotNull
+    @Length(max = 30)
     private String name;
+    @NotNull
+    @Length(max = 255)
     private String description;
+    @NotNull
+    @Price
     private BigDecimal price;
-    private Set<Rebate> rebates=new HashSet<>();
+    @NotEmpty
+    private Set<Rebate> rebates = new HashSet<>();
 
-    public Product(){}
+    public Product() {
+    }
 
     public Product(
             String name,
             String description,
             BigDecimal price,
             Set<Rebate> rebates
-    ){
-        this.name=name;
-        this.description=description;
-        this.price=price;
-        this.rebates=rebates;
+    ) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.rebates = rebates;
     }
 
     @Id

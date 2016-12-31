@@ -1,9 +1,10 @@
 package com.pizzashop.models;
 
-import com.pizzashop.repositories.listeners.DrinkListener;
-import com.pizzashop.repositories.listeners.PizzaListener;
+
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -14,8 +15,8 @@ import java.util.Set;
  */
 @Entity
 @PrimaryKeyJoinColumn(name = "productId")
-@EntityListeners(DrinkListener.class)
 public class Drink extends Product  implements Serializable {
+    @NotNull    @Length(max=10)
     private String literCount;
 
     public Drink(
