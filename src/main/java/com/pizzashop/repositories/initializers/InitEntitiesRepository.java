@@ -4,6 +4,7 @@ import com.pizzashop.models.*;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Cache;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
@@ -32,11 +33,23 @@ public class InitEntitiesRepository {
 
     @Transactional
     public void initializeProductSubComponents(){
+        Cache cache = entityManager.getEntityManagerFactory().getCache();
+
         for (Ingredient ingredient: DbInitializer.createIngredients()
              ) {
+            //System.out.println("before persist: "+cache.contains(Ingredient.class, ingredient.getIngredientId()));
+
             entityManager.persist(ingredient);
-            ingredients.add(ingredient);
+            //cache.
+
+            //System.out.println("after persist: "+cache.contains(Ingredient.class, ingredient.getIngredientId()));
+
+            entityManager.flush();
+                       ingredients.add(ingredient);
         }
+
+
+
 
         for (Seasoning seasoning : DbInitializer.createSeasonings()){
             entityManager.persist(seasoning);

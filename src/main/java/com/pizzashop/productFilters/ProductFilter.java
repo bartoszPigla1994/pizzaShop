@@ -1,27 +1,24 @@
 package com.pizzashop.productFilters;
 
-import com.pizzashop.annotations.Price;
-import org.hibernate.validator.constraints.NotEmpty;
+import com.pizzashop.models.Rebate;
 
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by barte on 31/12/2016.
  */
 public abstract class ProductFilter {
-    @NotEmpty
-    protected Set<String> rebates;
 
-    @NotEmpty
-    protected Set<String> names;
+    protected List<Rebate> rebates;
 
-    @NotNull
-    @Price
+
+    protected List<String> names;
+
+
     protected BigDecimal minPrice, maxPrice;
 
-    public ProductFilter(Set<String> rebates, Set<String> names, BigDecimal minPrice, BigDecimal maxPrice) {
+    public ProductFilter(List<Rebate> rebates, List<String> names, BigDecimal minPrice, BigDecimal maxPrice) {
         this.rebates = rebates;
         this.names = names;
         this.minPrice = minPrice;
@@ -31,20 +28,20 @@ public abstract class ProductFilter {
     public ProductFilter() {
     }
 
-    public Set<String> getRebates() {
+    public List<Rebate> getRebates() {
         return rebates;
     }
 
-    public void setRebates(Set<String> rebates) {
+    public void setRebates(List<Rebate> rebates) {
         this.rebates = rebates;
     }
 
-    public Set<String> getNames() {
+    public List<String> getNames() {
         return names;
     }
 
-    public void setNames(Set<String> names) {
-        this.names = names;
+    public void setNames(List<String> names) {
+            this.names = names;
     }
 
     public BigDecimal getMinPrice() {

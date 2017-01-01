@@ -1,6 +1,7 @@
 package com.pizzashop.models;
 
 import com.pizzashop.models.interfaces.Nameable;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -12,6 +13,9 @@ import java.util.Objects;
  * Created by barte on 09/12/2016.
  */
 @Entity
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+
 public class Seasoning  implements Serializable, Nameable {
     private Integer seasoningId;
 

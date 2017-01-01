@@ -12,6 +12,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.*;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
@@ -23,6 +24,7 @@ import javax.sql.DataSource;
 @Configuration
 @ComponentScan(basePackageClasses={PizzaController.class, DbInitializer.class, FilterChangedListener.class, ProductRepositoryImpl.class})
 @EnableTransactionManagement
+@EnableCaching
 public class PizzaShopApplication extends WebMvcConfigurerAdapter{
 	public static void main(String[] args) {
 		SpringApplication.run(PizzaShopApplication.class, args);
@@ -84,7 +86,6 @@ public class PizzaShopApplication extends WebMvcConfigurerAdapter{
 	public DrinkFilter drinkFilter(ProductFilterInitializer productFilterInitializer){
 		return productFilterInitializer.createDrinkFilter();
 	}
-
 //	@Bean
 //	public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
 //		JpaTransactionManager transactionManager = new JpaTransactionManager(emf);

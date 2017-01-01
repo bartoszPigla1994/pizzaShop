@@ -1,9 +1,9 @@
 package com;
 
 import com.pizzashop.PizzaShopApplication;
-import com.pizzashop.exceptions.IngredientNotFoundException;
-import com.pizzashop.exceptions.RebateNotFoundException;
+import com.pizzashop.models.Ingredient;
 import com.pizzashop.models.Pizza;
+import com.pizzashop.models.Rebate;
 import com.pizzashop.productFilters.PizzaFilter;
 import com.pizzashop.repositories.IngredientRepository;
 import com.pizzashop.repositories.PizzaRepository;
@@ -14,10 +14,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -29,7 +31,7 @@ import static com.pizzashop.repositories.initializers.DbInitializer.createPizza;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = PizzaShopApplication.class)
-@WebAppConfiguration
+@WebAppConfiguration    @DirtiesContext
 public class ProductFilterTest {
     @Autowired
     PizzaFilter pizzaFilter;
@@ -51,14 +53,14 @@ public class ProductFilterTest {
 
     @Test
     public void pizzaFilterIngredientsTest() {
-        Set<String> ingredients = ingredientRepository.findAll().stream().map(ingredient -> ingredient.getName()).collect(Collectors.toSet());
+        List<Ingredient> ingredients = ingredientRepository.findAll();
 
         compareNotOrderedCollections(ingredients,pizzaFilter.getIngredients());
     }
 
     @Test
     public void pizzaFilterRebatesTest() {
-        Set<String> rebates = rebateRepository.findAll().stream().map(rebate -> rebate.getName()).collect(Collectors.toSet());
+        List<Rebate> rebates = rebateRepository.findAll();
 
         compareNotOrderedCollections(rebates,pizzaFilter.getRebates());
     }
@@ -75,13 +77,16 @@ public class ProductFilterTest {
         //initEntitiesRepository.initializePizza();
         Pizza pizza1 = createPizza(new HashSet<>(ingredientRepository.findAll()),rebateRepository.findAll().get(0));
         pizza1.setName("nowaPizza");
-        try {
-            productRepository.save(pizza1);
-        } catch (IngredientNotFoundException e) {
-            e.printStackTrace();
-        } catch (RebateNotFoundException e) {
-            e.printStackTrace();
-        }
+
+        productRepository.save(pizza1);
+
+//        try {
+//            productRepository.save(pizza1);
+//        } catch (IngredientNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (RebateNotFoundException e) {
+//            e.printStackTrace();
+//        }
 
         pizzaFilterNamesTest();
     }

@@ -2,13 +2,15 @@ package com.pizzashop.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pizzashop.models.interfaces.Nameable;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cache;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -16,6 +18,8 @@ import java.util.Set;
  * Created by barte on 09/12/2016.
  */
 @Entity
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 public class Ingredient implements Serializable, Nameable{
     private Integer ingredientId;
 

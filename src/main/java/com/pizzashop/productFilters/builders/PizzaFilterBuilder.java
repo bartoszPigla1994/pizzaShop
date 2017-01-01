@@ -1,18 +1,44 @@
 package com.pizzashop.productFilters.builders;
 
+import com.pizzashop.models.Ingredient;
+import com.pizzashop.models.Rebate;
+import com.pizzashop.models.enums.DoughType;
 import com.pizzashop.productFilters.PizzaFilter;
 
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
 
-public class PizzaFilterBuilder extends ProductFilterBuilder<PizzaFilterBuilder>{
-    private Set<String> ingredients;
+public class PizzaFilterBuilder {
+    private List<Rebate> rebates;
+    private List<String> names;
+    private BigDecimal minPrice;
+    private BigDecimal maxPrice;
+    private List<Ingredient> ingredients;
     private BigDecimal doughMinPrice;
     private BigDecimal doughMaxPrice;
-    private Set<String> doughTypes;
+    private List<DoughType> doughTypes;
 
+    public PizzaFilterBuilder setRebates(List<Rebate> rebates) {
+        this.rebates = rebates;
+        return this;
+    }
 
-    public PizzaFilterBuilder setIngredients(Set<String> ingredients) {
+    public PizzaFilterBuilder setNames(List<String> names) {
+        this.names = names;
+        return this;
+    }
+
+    public PizzaFilterBuilder setMinPrice(BigDecimal minPrice) {
+        this.minPrice = minPrice;
+        return this;
+    }
+
+    public PizzaFilterBuilder setMaxPrice(BigDecimal maxPrice) {
+        this.maxPrice = maxPrice;
+        return this;
+    }
+
+    public PizzaFilterBuilder setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
         return this;
     }
@@ -27,7 +53,7 @@ public class PizzaFilterBuilder extends ProductFilterBuilder<PizzaFilterBuilder>
         return this;
     }
 
-    public PizzaFilterBuilder setDoughTypes(Set<String> doughTypes) {
+    public PizzaFilterBuilder setDoughTypes(List<DoughType> doughTypes) {
         this.doughTypes = doughTypes;
         return this;
     }
@@ -35,8 +61,4 @@ public class PizzaFilterBuilder extends ProductFilterBuilder<PizzaFilterBuilder>
     public PizzaFilter createPizzaFilter() {
         return new PizzaFilter(rebates, names, minPrice, maxPrice, ingredients, doughMinPrice, doughMaxPrice, doughTypes);
     }
-//
-//    public PizzaFilter update(PizzaFilter pizzaFilter){
-//        PizzaFilter pizzaFilter = (PizzaFilter) super.update(pizzaFilter);
-//    }
 }

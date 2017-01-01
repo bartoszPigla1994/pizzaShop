@@ -1,27 +1,28 @@
 package com.pizzashop.productFilters;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import com.pizzashop.models.Rebate;
+import com.pizzashop.models.Seasoning;
 
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by barte on 31/12/2016.
  */
 public class SauceFilter extends ProductFilter {
-    @NotEmpty
-    protected Set<String> seasonings;
 
-    public SauceFilter(Set<String> rebates, Set<String> names, BigDecimal minPrice, BigDecimal maxPrice, Set<String> seasonings) {
+    protected List<Seasoning> seasonings;
+
+    public SauceFilter(List<Rebate> rebates, List<String> names, BigDecimal minPrice, BigDecimal maxPrice, List<Seasoning> seasonings) {
         super(rebates, names, minPrice, maxPrice);
         this.seasonings = seasonings;
     }
 
-    public Set<String> getSeasonings() {
+    public List<Seasoning> getSeasonings() {
         return seasonings;
     }
 
-    public void setSeasonings(Set<String> seasonings) {
+    public void setSeasonings(List<Seasoning> seasonings) {
         this.seasonings = seasonings;
     }
 }

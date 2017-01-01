@@ -28,6 +28,7 @@ import static com.pizzashop.repositories.initializers.DbInitializer.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = PizzaShopApplication.class)
 @WebAppConfiguration
+@DirtiesContext
 public class InitEntitiesRepositoryTest {
     @Autowired
     ClientRepository clientRepository;

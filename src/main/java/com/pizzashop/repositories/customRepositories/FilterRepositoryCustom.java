@@ -2,14 +2,14 @@ package com.pizzashop.repositories.customRepositories;
 
 import com.pizzashop.models.interfaces.Nameable;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by barte on 31/12/2016.
  */
 public interface FilterRepositoryCustom {
-    <T extends Nameable> Set<String> getNames(Class<T> tClass);
+    <T extends Nameable> List<String> getNames(Class<T> tClass);
 
-    Set<String> getLiterCounts();
+    List<String> getLiterCounts();
 }
 

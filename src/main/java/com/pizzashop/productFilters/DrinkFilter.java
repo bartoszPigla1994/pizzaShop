@@ -1,24 +1,26 @@
 package com.pizzashop.productFilters;
 
+import com.pizzashop.models.Rebate;
+
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by barte on 31/12/2016.
  */
 public class DrinkFilter extends ProductFilter {
-    protected Set<String> literCounts;
+    protected List<String> literCounts;
 
-    public DrinkFilter(Set<String> rebates, Set<String> names, BigDecimal minPrice, BigDecimal maxPrice, Set<String> literCounts) {
+    public DrinkFilter(List<Rebate> rebates, List<String> names, BigDecimal minPrice, BigDecimal maxPrice, List<String> literCounts) {
         super(rebates, names, minPrice, maxPrice);
         this.literCounts = literCounts;
     }
 
-    public Set<String> getLiterCounts() {
+    public List<String> getLiterCounts() {
         return literCounts;
     }
 
-    public void setLiterCounts(Set<String> literCounts) {
+    public void setLiterCounts(List<String> literCounts) {
         this.literCounts = literCounts;
     }
 

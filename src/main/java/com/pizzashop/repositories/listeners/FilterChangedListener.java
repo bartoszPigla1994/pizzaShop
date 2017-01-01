@@ -30,34 +30,35 @@ public class FilterChangedListener {
     @Autowired
     ProductFilterInitializer productFilterInitializer;
 
-    @After(value = "execution(* com.pizzashop.repositories.ProductRepository.save (com.pizzashop.models.Pizza)) && args(pizza)")
+    @After(value = "execution(* com.pizzashop.repositories.PizzaRepository.save (com.pizzashop.models.Pizza)) && args(pizza)")
     public void afterSavePizza(Pizza pizza){
         productFilterInitializer.updatePizzaFilter(pizzaFilter);
     }
 
-    @After(value = "execution(* com.pizzashop.repositories.ProductRepository.delete (com.pizzashop.models.Pizza)) && args(pizza)")
+    @After(value = "execution(* com.pizzashop.repositories.PizzaRepository.delete (com.pizzashop.models.Pizza)) && args(pizza)")
     public void afterDeletePizza(Pizza pizza){
+
         productFilterInitializer.updatePizzaFilter(pizzaFilter);
     }
 
 
-    @After(value = "execution(* com.pizzashop.repositories.ProductRepository.save (com.pizzashop.models.Drink)) && args(drink)")
+    @After(value = "execution(* com.pizzashop.repositories.DrinkRepository.save (com.pizzashop.models.Drink)) && args(drink)")
     public void afterSaveDrink(Drink drink){
         productFilterInitializer.updateDrinkFilter(drinkFilter);
     }
 
-    @After(value = "execution(* com.pizzashop.repositories.ProductRepository.delete (com.pizzashop.models.Drink)) && args(drink)")
+    @After(value = "execution(* com.pizzashop.repositories.DrinkRepository.delete (com.pizzashop.models.Drink)) && args(drink)")
     public void afterDeleteDrink(Drink drink){
         productFilterInitializer.updateDrinkFilter(drinkFilter);
     }
 
 
-    @After(value = "execution(* com.pizzashop.repositories.ProductRepository.save (com.pizzashop.models.Sauce)) && args(sauce)")
+    @After(value = "execution(* com.pizzashop.repositories.SauceRepository.save (com.pizzashop.models.Sauce)) && args(sauce)")
     public void afterSaveSauce(Sauce sauce){
         productFilterInitializer.updateSauceFilter(sauceFilter);
     }
 
-    @After(value = "execution(* com.pizzashop.repositories.ProductRepository.delete (com.pizzashop.models.Sauce)) && args(sauce)")
+    @After(value = "execution(* com.pizzashop.repositories.SauceRepository.delete (com.pizzashop.models.Sauce)) && args(sauce)")
     public void afterDeleteSauce(Sauce sauce){
         productFilterInitializer.updateSauceFilter(sauceFilter);
     }

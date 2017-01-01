@@ -2,10 +2,13 @@ package com.pizzashop.models;
 
 import com.pizzashop.annotations.Price;
 import com.pizzashop.models.interfaces.Nameable;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cache;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -19,6 +22,8 @@ import java.util.Set;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public abstract class Product implements Serializable, Nameable {
     private Integer productId;
     @NotNull
@@ -31,6 +36,7 @@ public abstract class Product implements Serializable, Nameable {
     @Price
     private BigDecimal price;
     @NotEmpty
+    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.TRANSACTIONAL)
     private Set<Rebate> rebates = new HashSet<>();
 
     public Product() {

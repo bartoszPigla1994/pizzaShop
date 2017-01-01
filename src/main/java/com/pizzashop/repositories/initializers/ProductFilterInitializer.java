@@ -1,8 +1,7 @@
 package com.pizzashop.repositories.initializers;
 
-import com.pizzashop.models.*;
+import com.pizzashop.models.Pizza;
 import com.pizzashop.models.enums.DoughType;
-import com.pizzashop.models.interfaces.Nameable;
 import com.pizzashop.productFilters.DrinkFilter;
 import com.pizzashop.productFilters.PizzaFilter;
 import com.pizzashop.productFilters.SauceFilter;
@@ -10,9 +9,12 @@ import com.pizzashop.productFilters.builders.DrinkFilterBuilder;
 import com.pizzashop.productFilters.builders.PizzaFilterBuilder;
 import com.pizzashop.productFilters.builders.SauceFilterBuilder;
 import com.pizzashop.repositories.FilterRepository;
+import com.pizzashop.repositories.IngredientRepository;
+import com.pizzashop.repositories.RebateRepository;
+import com.pizzashop.repositories.SeasoningRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Set;
+import java.util.Arrays;
 
 /**
  * Created by barte on 31/12/2016.
@@ -21,31 +23,36 @@ public class ProductFilterInitializer {
     @Autowired
     FilterRepository filterRepository;
 
-    public <T extends Nameable> Set<String> getNames(Class<T> cl){
-        return filterRepository.getNames(cl);
-    }
+    @Autowired
+    RebateRepository rebateRepository;
+
+    @Autowired
+    IngredientRepository ingredientRepository;
+
+    @Autowired
+    SeasoningRepository seasoningRepository;
 
     public PizzaFilter createPizzaFilter() {
         return new PizzaFilterBuilder()
-                .setNames(getNames(Pizza.class))
-                .setRebates(getNames(Rebate.class))
-                .setDoughTypes(DoughType.names())
-                .setIngredients(getNames(Ingredient.class))
+                .setNames(filterRepository.getNames(Pizza.class))
+                .setRebates(rebateRepository.findAll())
+                .setDoughTypes(Arrays.asList(DoughType.values()))
+                .setIngredients(ingredientRepository.findAll())
                 .createPizzaFilter();
     }
 
     public SauceFilter createSauceFilter() {
         return new SauceFilterBuilder()
-                .setNames(getNames(Sauce.class))
-                .setRebates(getNames(Rebate.class))
-                .setSeasonings(getNames(Seasoning.class))
+                .setNames(filterRepository.getNames(Pizza.class))
+                .setRebates(rebateRepository.findAll())
+                .setSeasonings(seasoningRepository.findAll())
                 .createSauceFilter();
     }
 
     public DrinkFilter createDrinkFilter() {
         return new DrinkFilterBuilder()
-                .setNames(getNames(Drink.class))
-                .setRebates(getNames(Rebate.class))
+                .setNames(filterRepository.getNames(Pizza.class))
+                .setRebates(rebateRepository.findAll())
                 .setLiterCounts(filterRepository.getLiterCounts())
                 .createDrinkFilter();
     }

@@ -15,6 +15,7 @@ import java.util.Set;
  */
 @Entity
 @PrimaryKeyJoinColumn(name = "productId")
+@Cacheable
 public class Drink extends Product  implements Serializable {
     @NotNull    @Length(max=10)
     private String literCount;

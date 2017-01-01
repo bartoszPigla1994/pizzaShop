@@ -7,6 +7,8 @@ import com.pizzashop.models.Drink;
 import com.pizzashop.models.Pizza;
 import com.pizzashop.models.Sauce;
 
+import java.util.List;
+
 /**
  * Created by barte on 30/12/2016.
  */
@@ -15,5 +17,5 @@ public interface ProductRepositoryCustom {
     Sauce save(Sauce sauce) throws SeasoningNotFoundException, RebateNotFoundException;
     Drink save(Drink drink) throws RebateNotFoundException;
 
-
+    List<Pizza> getFromCache();
 }

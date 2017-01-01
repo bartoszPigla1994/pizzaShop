@@ -1,9 +1,12 @@
 package com.pizzashop.models;
 
 import com.pizzashop.models.interfaces.Nameable;
+import org.hibernate.annotations.*;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -16,9 +19,11 @@ import java.util.Set;
  */
 @Entity
 @PrimaryKeyJoinColumn(name = "productId")
+@Cacheable
 public class Sauce extends Product implements Serializable, Nameable {
 
     @NotEmpty
+    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Seasoning> seasonings=new HashSet<>();
 
     public Sauce(

@@ -1,27 +1,23 @@
 package com.pizzashop.productFilters;
 
-import com.pizzashop.annotations.Price;
-import org.hibernate.validator.constraints.NotEmpty;
+import com.pizzashop.models.Ingredient;
+import com.pizzashop.models.Rebate;
+import com.pizzashop.models.enums.DoughType;
 
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by barte on 31/12/2016.
  */
 public class PizzaFilter extends ProductFilter {
-    @NotEmpty
-    protected Set<String> ingredients;
+    protected List<Ingredient> ingredients;
 
-    @NotNull
-    @Price
     protected BigDecimal doughMinPrice, doughMaxPrice;
 
-    @NotEmpty
-    protected Set<String> doughTypes;
+    protected List<DoughType> doughTypes;
 
-    public PizzaFilter(Set<String> rebates, Set<String> names, BigDecimal minPrice, BigDecimal maxPrice, Set<String> ingredients, BigDecimal doughMinPrice, BigDecimal doughMaxPrice, Set<String> doughTypes) {
+    public PizzaFilter(List<Rebate> rebates, List<String> names, BigDecimal minPrice, BigDecimal maxPrice, List<Ingredient> ingredients, BigDecimal doughMinPrice, BigDecimal doughMaxPrice, List<DoughType> doughTypes) {
         super(rebates, names, minPrice, maxPrice);
         this.ingredients = ingredients;
         this.doughMinPrice = doughMinPrice;
@@ -29,11 +25,11 @@ public class PizzaFilter extends ProductFilter {
         this.doughTypes = doughTypes;
     }
 
-    public Set<String> getIngredients() {
+    public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(Set<String> ingredients) {
+    public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 
@@ -53,11 +49,11 @@ public class PizzaFilter extends ProductFilter {
         this.doughMaxPrice = doughMaxPrice;
     }
 
-    public Set<String> getDoughTypes() {
+    public List<DoughType> getDoughTypes() {
         return doughTypes;
     }
 
-    public void setDoughTypes(Set<String> doughTypes) {
+    public void setDoughTypes(List<DoughType> doughTypes) {
         this.doughTypes = doughTypes;
     }
 }

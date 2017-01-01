@@ -4,6 +4,8 @@ import com.pizzashop.exceptions.IngredientNotFoundException;
 import com.pizzashop.exceptions.RebateNotFoundException;
 import com.pizzashop.exceptions.SeasoningNotFoundException;
 import com.pizzashop.models.*;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -25,15 +28,32 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
 
     @Override
     public Pizza save(Pizza pizza) throws IngredientNotFoundException, RebateNotFoundException {
-        Set<Ingredient> ingredients = findIngredients(pizza);
-        pizza.setIngredients(ingredients);
-
-        Set<Rebate> rebates = findRebates(pizza);
-        pizza.setRebates(rebates);
+//        Ingredient i1=entityManager.find(Ingredient.class,1);
+//        Set<Ingredient> ingredients = findIngredients(pizza);
+//        pizza.setIngredients(ingredients);
+//
+//        Set<Rebate> rebates = findRebates(pizza);
+//        pizza.setRebates(rebates);
 
         entityManager.persist(pizza);
         entityManager.flush();
         return pizza;
+    }
+
+    @Override
+    public List<Pizza> getFromCache() {
+        Session session=entityManager.unwrap(Session.class);
+        Query query=session.createQuery("select p from Pizza p");
+
+        query.setCacheable(true);
+
+        List<Pizza> list= (List<Pizza>)query.list();
+        for (Pizza p:list
+             ) {
+            System.out.println("cache:"+
+                    entityManager.getEntityManagerFactory().getCache().contains(Pizza.class,p));
+        }
+        return list;
     }
 
     @Override
